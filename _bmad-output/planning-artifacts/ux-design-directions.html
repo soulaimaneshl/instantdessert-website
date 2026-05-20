@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instant Dessert — Directions Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --chocolat: #2B1A14;
+    --creme: #FFF7EE;
+    --rose: #D97773;
+    --caramel: #C8953E;
+    --blush: #FCE7E3;
+    --blanc: #FFFFFF;
+  }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: #1a1a1a;
+    color: #fff;
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #111;
+    border-bottom: 1px solid #333;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .nav-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--creme);
+    margin-right: 16px;
+    flex-shrink: 0;
+  }
+  .nav-title span { color: var(--rose); }
+  .tab {
+    padding: 8px 20px;
+    border-radius: 24px;
+    border: 1px solid #444;
+    background: transparent;
+    color: #aaa;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .tab:hover { border-color: var(--rose); color: var(--rose); }
+  .tab.active { background: var(--rose); border-color: var(--rose); color: #fff; }
+
+  /* ── LAYOUT ── */
+  .scene {
+    display: none;
+    padding: 40px 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .scene.active { display: block; }
+
+  .scene-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .scene-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    color: var(--creme);
+    margin-bottom: 8px;
+  }
+  .scene-header p {
+    font-size: 14px;
+    color: #888;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* ── PHONE FRAME ── */
+  .phones {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  .phone-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .phone-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .phone {
+    width: 360px;
+    height: 720px;
+    border-radius: 40px;
+    border: 8px solid #222;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0,0,0,.6), inset 0 0 0 1px #333;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    scrollbar-width: none;
+  }
+  .phone-screen::-webkit-scrollbar { display: none; }
+
+
+  /* ═══════════════════════════════════════════
+     DIRECTION 1 — LUMINEUX CRÈME
+  ═══════════════════════════════════════════ */
+  .d1-screen {
+    background: var(--creme);
+    color: var(--chocolat);
+    min-height: 100%;
+  }
+  .d1-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    background: var(--creme);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--blush);
+  }
+  .d1-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--chocolat);
+  }
+  .d1-logo span { color: var(--rose); font-style: italic; }
+  .d1-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--blush); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .d1-hero {
+    height: 220px;
+    background: linear-gradient(160deg, var(--blush) 0%, var(--creme) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .d1-hero::after {
+    content: '✦';
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 40px;
+    color: var(--caramel);
+    opacity: .3;
+  }
+  .d1-hero-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--rose);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .d1-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    line-height: 1.1;
+    color: var(--chocolat);
+    margin-bottom: 16px;
+  }
+  .d1-hero h1 em { color: var(--rose); font-style: italic; }
+  .d1-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--rose);
+    color: #fff;
+    border-radius: 24px;
+    font-size: 13px;
+    font-weight: 600;
+    width: fit-content;
+  }
+  .d1-cats {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .d1-cat {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    border: 1px solid var(--blush);
+    color: var(--chocolat);
+    background: var(--blanc);
+    flex-shrink: 0;
+  }
+  .d1-cat.active { background: var(--chocolat); color: var(--creme); border-color: var(--chocolat); }
+  .d1-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--chocolat);
+    padding: 8px 16px 4px;
+  }
+  .d1-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 8px 16px;
+  }
+  .d1-card {
+    background: var(--blanc);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(43,26,20,.06);
+  }
+  .d1-card-img {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+  }
+  .d1-card-img.a { background: linear-gradient(135deg, #f5e6d3, #fdd); }
+  .d1-card-img.b { background: linear-gradient(135deg, #e8f0f5, #d5e8f5); }
+  .d1-card-img.c { background: linear-gradient(135deg, #fef3d0, #fde); }
+  .d1-card-img.d { background: linear-gradient(135deg, #e8f5e9, #d5f5e3); }
+  .d1-card-body { padding: 10px 12px; }
+  .d1-card-name { font-size: 13px; font-weight: 600; color: var(--chocolat); margin-bottom: 4px; }
+  .d1-card-sub { font-size: 11px; color: #999; margin-bottom: 8px; }
+  .d1-card-row { display: flex; align-items: center; justify-content: space-between; }
+  .d1-card-price { font-size: 14px; font-weight: 700; color: var(--chocolat); }
+  .d1-card-add {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--rose);
+    color: #fff;
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 300;
+    cursor: pointer;
+  }
+  .d1-habitude {
+    margin: 8px 16px;
+    padding: 12px 14px;
+    background: var(--blush);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .d1-habitude-icon { font-size: 20px; }
+  .d1-habitude-text { font-size: 12px; color: var(--chocolat); }
+  .d1-habitude-text strong { display: block; font-size: 13px; margin-bottom: 2px; }
+  .d1-habitude-btn { margin-left: auto; padding: 6px 12px; background: var(--chocolat); color: var(--creme); border-radius: 20px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+  .d1-cartbar {
+    position: sticky;
+    bottom: 0;
+    background: var(--chocolat);
+    color: var(--creme);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 16px 16px 0 0;
+    margin-top: 20px;
+  }
+  .d1-cartbar-left { font-size: 13px; }
+  .d1-cartbar-left strong { display: block; font-size: 16px; }
+  .d1-cartbar-btn { padding: 10px 20px; background: var(--rose); color: #fff; border-radius: 24px; font-size: 13px; font-weight: 600; }
+
+
+  /* ═══════════════════════════════════════════
+     DIRECTION 2 — IMMERSIVE DARK
+  ═══════════════════════════════════════════ */
+  .d2-screen {
+    background: var(--chocolat);
+    color: var(--creme);
+    min-height: 100%;
+  }
+  .d2-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+  .d2-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--creme);
+  }
+  .d2-logo span { color: var(--rose); }
+  .d2-icon { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,.1); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .d2-hero {
+    height: 280px;
+    background: linear-gradient(180deg, rgba(43,26,20,0) 0%, var(--chocolat) 100%),
+                linear-gradient(135deg, #4a2c20 0%, #2B1A14 60%, #1a0e0a 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px 16px;
+    position: relative;
+  }
+  .d2-hero-emoji { position: absolute; top: 50px; right: 20px; font-size: 80px; opacity: .8; filter: drop-shadow(0 8px 24px rgba(0,0,0,.4)); }
+  .d2-hero-tag { font-size: 11px; font-weight: 600; color: var(--caramel); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+  .d2-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: 38px; line-height: 1.1; color: var(--creme); margin-bottom: 14px; }
+  .d2-hero h1 em { color: var(--rose); font-style: italic; }
+  .d2-hero-sub { font-size: 13px; color: rgba(255,247,238,.6); margin-bottom: 16px; }
+  .d2-btn { display: inline-block; padding: 12px 24px; background: var(--rose); color: #fff; border-radius: 30px; font-size: 13px; font-weight: 600; width: fit-content; }
+  .d2-cats {
+    display: flex;
+    gap: 8px;
+    padding: 16px 16px 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .d2-cat {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    border: 1px solid rgba(255,255,255,.15);
+    color: rgba(255,247,238,.6);
+    flex-shrink: 0;
+  }
+  .d2-cat.active { background: var(--rose); border-color: var(--rose); color: #fff; }
+  .d2-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--creme);
+    padding: 8px 16px 4px;
+  }
+  .d2-list { display: flex; flex-direction: column; gap: 0; padding: 0 16px 8px; }
+  .d2-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .d2-item-img {
+    width: 72px;
+    height: 72px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+  }
+  .d2-item-img.a { background: rgba(255,255,255,.08); }
+  .d2-item-img.b { background: rgba(200,149,62,.15); }
+  .d2-item-img.c { background: rgba(217,119,115,.12); }
+  .d2-item-img.d { background: rgba(255,255,255,.05); }
+  .d2-item-body { flex: 1; }
+  .d2-item-name { font-size: 14px; font-weight: 600; color: var(--creme); margin-bottom: 3px; }
+  .d2-item-desc { font-size: 12px; color: rgba(255,247,238,.4); margin-bottom: 6px; }
+  .d2-item-price { font-size: 15px; font-weight: 700; color: var(--caramel); }
+  .d2-item-add {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.2);
+    color: var(--creme);
+    font-size: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 300;
+    flex-shrink: 0;
+  }
+  .d2-habitude {
+    margin: 8px 16px;
+    padding: 14px;
+    border: 1px solid rgba(200,149,62,.3);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(200,149,62,.05);
+  }
+  .d2-habitude-icon { font-size: 22px; }
+  .d2-habitude-text { font-size: 12px; color: rgba(255,247,238,.7); }
+  .d2-habitude-text strong { display: block; font-size: 13px; color: var(--creme); margin-bottom: 2px; }
+  .d2-habitude-btn { margin-left: auto; padding: 7px 14px; background: var(--caramel); color: var(--chocolat); border-radius: 20px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .d2-cartbar {
+    position: sticky;
+    bottom: 0;
+    background: var(--rose);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .d2-cartbar-left { font-size: 13px; color: rgba(255,255,255,.8); }
+  .d2-cartbar-left strong { display: block; font-size: 16px; color: #fff; }
+  .d2-cartbar-btn { padding: 10px 20px; background: #fff; color: var(--rose); border-radius: 24px; font-size: 13px; font-weight: 700; }
+
+
+  /* ═══════════════════════════════════════════
+     DIRECTION 3 — BOLD EDITORIAL
+  ═══════════════════════════════════════════ */
+  .d3-screen {
+    background: var(--creme);
+    color: var(--chocolat);
+    min-height: 100%;
+  }
+  .d3-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: var(--creme);
+    border-bottom: 2px solid var(--chocolat);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .d3-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--chocolat);
+    letter-spacing: -0.5px;
+  }
+  .d3-logo span { color: var(--rose); }
+  .d3-icon { font-size: 20px; }
+  .d3-hero {
+    background: var(--chocolat);
+    color: var(--creme);
+    padding: 32px 16px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .d3-hero::before {
+    content: 'INSTANT\ADESSERT';
+    white-space: pre;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 600;
+    color: rgba(255,255,255,.03);
+    line-height: 1;
+    text-align: right;
+  }
+  .d3-hero-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--rose);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+  .d3-hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    line-height: 1;
+    margin-bottom: 6px;
+    font-weight: 400;
+  }
+  .d3-hero-divider { width: 40px; height: 2px; background: var(--caramel); margin: 12px 0; }
+  .d3-hero-sub { font-size: 13px; color: rgba(255,247,238,.6); line-height: 1.6; margin-bottom: 20px; }
+  .d3-hero-actions { display: flex; gap: 10px; }
+  .d3-btn-primary { padding: 11px 22px; background: var(--rose); color: #fff; border-radius: 4px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+  .d3-btn-secondary { padding: 11px 22px; border: 1px solid rgba(255,255,255,.3); color: var(--creme); border-radius: 4px; font-size: 12px; font-weight: 500; }
+  .d3-cats {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-bottom: 2px solid var(--chocolat);
+  }
+  .d3-cat {
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    color: #999;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    flex-shrink: 0;
+  }
+  .d3-cat.active { color: var(--chocolat); border-bottom-color: var(--rose); }
+  .d3-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    color: var(--chocolat);
+    padding: 16px 16px 4px;
+    border-top: none;
+  }
+  .d3-grid { display: grid; grid-template-columns: 1fr; gap: 0; padding: 8px 16px; }
+  .d3-card {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--chocolat);
+    border-radius: 0;
+    margin-bottom: -1px;
+    overflow: hidden;
+  }
+  .d3-card-img {
+    width: 100px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    border-right: 1px solid var(--chocolat);
+  }
+  .d3-card-img.a { background: #f5ebe3; }
+  .d3-card-img.b { background: #e8f2f8; }
+  .d3-card-img.c { background: #fef5d8; }
+  .d3-card-img.d { background: #edf5ec; }
+  .d3-card-body { flex: 1; padding: 14px; display: flex; flex-direction: column; justify-content: space-between; }
+  .d3-card-name { font-size: 14px; font-weight: 700; color: var(--chocolat); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .d3-card-desc { font-size: 12px; color: #888; line-height: 1.4; margin-bottom: 10px; }
+  .d3-card-row { display: flex; align-items: center; justify-content: space-between; }
+  .d3-card-price { font-size: 16px; font-weight: 700; color: var(--chocolat); }
+  .d3-card-add {
+    padding: 6px 14px;
+    background: var(--chocolat);
+    color: var(--creme);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .d3-habitude {
+    margin: 12px 16px;
+    padding: 12px 14px;
+    background: var(--blush);
+    border-left: 3px solid var(--rose);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .d3-habitude-icon { font-size: 20px; }
+  .d3-habitude-text { font-size: 12px; color: var(--chocolat); }
+  .d3-habitude-text strong { display: block; font-size: 13px; margin-bottom: 2px; }
+  .d3-habitude-btn { margin-left: auto; padding: 7px 14px; background: var(--chocolat); color: var(--creme); border-radius: 4px; font-size: 11px; font-weight: 700; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.5px; }
+  .d3-cartbar {
+    position: sticky;
+    bottom: 0;
+    background: var(--creme);
+    border-top: 2px solid var(--chocolat);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .d3-cartbar-left { font-size: 13px; color: var(--chocolat); }
+  .d3-cartbar-left strong { display: block; font-size: 16px; }
+  .d3-cartbar-btn { padding: 12px 24px; background: var(--chocolat); color: var(--creme); border-radius: 4px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── NOTES ── */
+  .notes {
+    max-width: 900px;
+    margin: 40px auto 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .note {
+    background: #1e1e1e;
+    border-radius: 12px;
+    padding: 20px;
+    border-top: 3px solid var(--rose);
+  }
+  .note-title { font-size: 13px; font-weight: 700; color: var(--creme); margin-bottom: 10px; }
+  .note li { font-size: 12px; color: #888; margin-bottom: 6px; padding-left: 12px; position: relative; }
+  .note li::before { content: '✓'; position: absolute; left: 0; color: var(--caramel); }
+  .note li.neg::before { content: '–'; color: #666; }
+
+  @media (max-width: 800px) {
+    .phones { flex-direction: column; align-items: center; }
+    .notes { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-title">Instant <span>Dessert</span> — Directions Design</div>
+  <button class="tab" onclick="show('d1', this)">Direction 1 · Lumineux Crème</button>
+  <button class="tab" onclick="show('d2', this)">Direction 2 · Immersive Dark</button>
+  <button class="tab" onclick="show('d3', this)">Direction 3 · Bold Éditorial</button>
+  <button class="tab active" onclick="show('df', this)">⭐ Direction Finale · Combinée</button>
+</nav>
+
+<!-- ── DIRECTION 1 ── -->
+<div id="d1" class="scene">
+  <div class="scene-header">
+    <h2>Direction 1 — Lumineux Crème</h2>
+    <p>Fond crème dominant, cards blanches aérées, accents rose poudré. Évoque la pâtisserie artisanale, la lumière, le fait-maison.</p>
+  </div>
+  <div class="phones">
+    <div class="phone-wrap">
+      <div class="phone-label">Accueil</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="d1-screen">
+            <div class="d1-header">
+              <div class="d1-logo">Instant <span>Dessert</span></div>
+              <div class="d1-icon">👤</div>
+            </div>
+            <div class="d1-hero">
+              <div class="d1-hero-tag">Dark Kitchen · Hauts-de-Seine</div>
+              <h1>Un dessert,<br><em>tout de suite.</em></h1>
+              <div class="d1-btn">Commander maintenant</div>
+            </div>
+            <div class="d1-habitude">
+              <div class="d1-habitude-icon">⭐</div>
+              <div class="d1-habitude-text">
+                <strong>Votre habituel ?</strong>
+                Riz b-laben + Boisson maison · 11,80 €
+              </div>
+              <div class="d1-habitude-btn">Réajouter</div>
+            </div>
+            <div class="d1-cats">
+              <div class="d1-cat active">Tout</div>
+              <div class="d1-cat">Desserts</div>
+              <div class="d1-cat">Boissons</div>
+              <div class="d1-cat">Viennoiseries</div>
+            </div>
+            <div class="d1-section-title">Nos créations</div>
+            <div class="d1-grid">
+              <div class="d1-card">
+                <div class="d1-card-img a">🍚</div>
+                <div class="d1-card-body">
+                  <div class="d1-card-name">Riz b-laben</div>
+                  <div class="d1-card-sub">Crémeux, fleur d'oranger</div>
+                  <div class="d1-card-row">
+                    <div class="d1-card-price">6,90 €</div>
+                    <div class="d1-card-add">+</div>
+                  </div>
+                </div>
+              </div>
+              <div class="d1-card">
+                <div class="d1-card-img b">🥤</div>
+                <div class="d1-card-body">
+                  <div class="d1-card-name">Boisson maison</div>
+                  <div class="d1-card-sub">Fraîche, artisanale</div>
+                  <div class="d1-card-row">
+                    <div class="d1-card-price">4,90 €</div>
+                    <div class="d1-card-add">+</div>
+                  </div>
+                </div>
+              </div>
+              <div class="d1-card">
+                <div class="d1-card-img c">🥐</div>
+                <div class="d1-card-body">
+                  <div class="d1-card-name">Croissant fourré</div>
+                  <div class="d1-card-sub">Chaud, généreux</div>
+                  <div class="d1-card-row">
+                    <div class="d1-card-price">5,50 €</div>
+                    <div class="d1-card-add">+</div>
+                  </div>
+                </div>
+              </div>
+              <div class="d1-card">
+                <div class="d1-card-img d">🥞</div>
+                <div class="d1-card-body">
+                  <div class="d1-card-name">Crêpes</div>
+                  <div class="d1-card-sub">Dorées, garnies</div>
+                  <div class="d1-card-row">
+                    <div class="d1-card-price">5,90 €</div>
+                    <div class="d1-card-add">+</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="height: 20px;"></div>
+            <div class="d1-cartbar">
+              <div class="d1-cartbar-left">
+                2 articles
+                <strong>11,80 €</strong>
+              </div>
+              <div class="d1-cartbar-btn">Voir le panier →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <div class="note">
+      <div class="note-title">Points forts</div>
+      <ul>
+        <li>Lisible, accessible, rassure</li>
+        <li>Crème = identité visible partout</li>
+        <li>Cards aérées, faciles à scanner</li>
+        <li>Hiérarchie claire photo → nom → prix</li>
+      </ul>
+    </div>
+    <div class="note">
+      <div class="note-title">Points de vigilance</div>
+      <ul>
+        <li class="neg">Moins immersif qu'un dark mode</li>
+        <li class="neg">Dépend fortement de la qualité des photos</li>
+      </ul>
+    </div>
+    <div class="note">
+      <div class="note-title">Convient si…</div>
+      <ul>
+        <li>On veut rassurer un nouveau client</li>
+        <li>On veut ressembler à une pâtisserie artisanale de quartier</li>
+        <li>On privilégie la clarté à l'immersion</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ── DIRECTION 2 ── -->
+<div id="d2" class="scene">
+  <div class="scene-header">
+    <h2>Direction 2 — Immersive Dark</h2>
+    <p>Fond chocolat profond, visuels lumineux sur sombre. Premium, désirable, nuit. Pense Nespresso, non Starbucks.</p>
+  </div>
+  <div class="phones">
+    <div class="phone-wrap">
+      <div class="phone-label">Accueil</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="d2-screen">
+            <div class="d2-header">
+              <div class="d2-logo">Instant <span>Dessert</span></div>
+              <div class="d2-icon">👤</div>
+            </div>
+            <div class="d2-hero">
+              <div class="d2-hero-emoji">🍚</div>
+              <div class="d2-hero-tag">✦ Artisanal · Hauts-de-Seine</div>
+              <h1>Le dessert<br>qui <em>s'impose.</em></h1>
+              <div class="d2-hero-sub">Click & collect ou livraison · 4 créations</div>
+              <div class="d2-btn">Commander</div>
+            </div>
+            <div class="d2-habitude">
+              <div class="d2-habitude-icon">✦</div>
+              <div class="d2-habitude-text">
+                <strong>Votre habituel</strong>
+                Riz b-laben + Boisson · 11,80 €
+              </div>
+              <div class="d2-habitude-btn">Réajouter</div>
+            </div>
+            <div class="d2-cats">
+              <div class="d2-cat active">Tout</div>
+              <div class="d2-cat">Desserts</div>
+              <div class="d2-cat">Boissons</div>
+              <div class="d2-cat">Viennoiseries</div>
+            </div>
+            <div class="d2-section-title">Nos créations</div>
+            <div class="d2-list">
+              <div class="d2-item">
+                <div class="d2-item-img a">🍚</div>
+                <div class="d2-item-body">
+                  <div class="d2-item-name">Riz b-laben</div>
+                  <div class="d2-item-desc">Crémeux, fleur d'oranger, fait le matin</div>
+                  <div class="d2-item-price">6,90 €</div>
+                </div>
+                <div class="d2-item-add">+</div>
+              </div>
+              <div class="d2-item">
+                <div class="d2-item-img b">🥤</div>
+                <div class="d2-item-body">
+                  <div class="d2-item-name">Boisson maison</div>
+                  <div class="d2-item-desc">Préparée chaque matin, fraîche</div>
+                  <div class="d2-item-price">4,90 €</div>
+                </div>
+                <div class="d2-item-add">+</div>
+              </div>
+              <div class="d2-item">
+                <div class="d2-item-img c">🥐</div>
+                <div class="d2-item-body">
+                  <div class="d2-item-name">Croissant fourré</div>
+                  <div class="d2-item-desc">Beurré, garni, servi chaud</div>
+                  <div class="d2-item-price">5,50 €</div>
+                </div>
+                <div class="d2-item-add">+</div>
+              </div>
+              <div class="d2-item">
+                <div class="d2-item-img d">🥞</div>
+                <div class="d2-item-body">
+                  <div class="d2-item-name">Crêpes</div>
+                  <div class="d2-item-desc">Dorées, garnies à la commande</div>
+                  <div class="d2-item-price">5,90 €</div>
+                </div>
+                <div class="d2-item-add">+</div>
+              </div>
+            </div>
+            <div style="height: 20px;"></div>
+            <div class="d2-cartbar">
+              <div class="d2-cartbar-left">
+                2 articles
+                <strong>11,80 €</strong>
+              </div>
+              <div class="d2-cartbar-btn">Voir le panier</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <div class="note">
+      <div class="note-title">Points forts</div>
+      <ul>
+        <li>Très différenciant vs concurrents</li>
+        <li>Sentiment premium immédiat</li>
+        <li>Émotion forte dès l'ouverture</li>
+        <li>Cohérent avec le ton "gourmand premium"</li>
+      </ul>
+    </div>
+    <div class="note">
+      <div class="note-title">Points de vigilance</div>
+      <ul>
+        <li class="neg">Exige des photos très travaillées</li>
+        <li class="neg">Peut sembler intimidant pour certains</li>
+        <li class="neg">Contraste à surveiller pour l'accessibilité</li>
+      </ul>
+    </div>
+    <div class="note">
+      <div class="note-title">Convient si…</div>
+      <ul>
+        <li>On veut se positionner haut de gamme</li>
+        <li>On a des photos produit de qualité</li>
+        <li>On cible un client urbain, 20–35 ans</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ── DIRECTION 3 ── -->
+<div id="d3" class="scene">
+  <div class="scene-header">
+    <h2>Direction 3 — Bold Éditorial</h2>
+    <p>Typographie forte, noir & crème, accents roses. Inspiré des magazines gastronomiques. Structuré, élégant, moderne.</p>
+  </div>
+  <div class="phones">
+    <div class="phone-wrap">
+      <div class="phone-label">Accueil</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="d3-screen">
+            <div class="d3-header">
+              <div class="d3-logo">Instant <span>Dessert</span></div>
+              <div class="d3-icon">🛒</div>
+            </div>
+            <div class="d3-hero">
+              <div class="d3-hero-tag">Dark Kitchen · 92</div>
+              <h1>Un dessert.<br>Tout de suite.</h1>
+              <div class="d3-hero-divider"></div>
+              <div class="d3-hero-sub">Artisanal, livré ou à emporter. 4 créations, faites ce matin.</div>
+              <div class="d3-hero-actions">
+                <div class="d3-btn-primary">Commander</div>
+                <div class="d3-btn-secondary">Notre labo →</div>
+              </div>
+            </div>
+            <div class="d3-habitude">
+              <div class="d3-habitude-icon">↩</div>
+              <div class="d3-habitude-text">
+                <strong>Votre habituel</strong>
+                Riz b-laben + Boisson · 11,80 €
+              </div>
+              <div class="d3-habitude-btn">Réajouter</div>
+            </div>
+            <div class="d3-cats">
+              <div class="d3-cat active">Tout</div>
+              <div class="d3-cat">Desserts</div>
+              <div class="d3-cat">Boissons</div>
+              <div class="d3-cat">Viennoiseries</div>
+            </div>
+            <div class="d3-section-title">Nos créations</div>
+            <div class="d3-grid">
+              <div class="d3-card">
+                <div class="d3-card-img a">🍚</div>
+                <div class="d3-card-body">
+                  <div>
+                    <div class="d3-card-name">Riz b-laben</div>
+                    <div class="d3-card-desc">Crémeux, fleur d'oranger, fait le matin</div>
+                  </div>
+                  <div class="d3-card-row">
+                    <div class="d3-card-price">6,90 €</div>
+                    <div class="d3-card-add">Ajouter</div>
+                  </div>
+                </div>
+              </div>
+              <div class="d3-card">
+                <div class="d3-card-img b">🥤</div>
+                <div class="d3-card-body">
+                  <div>
+                    <div class="d3-card-name">Boisson maison</div>
+                    <div class="d3-card-desc">Fraîche, préparée chaque matin</div>
+                  </div>
+                  <div class="d3-card-row">
+                    <div class="d3-card-price">4,90 €</div>
+                    <div class="d3-card-add">Ajouter</div>
+                  </div>
+                </div>
+              </div>
+              <div class="d3-card">
+                <div class="d3-card-img c">🥐</div>
+                <div class="d3-card-body">
+                  <div>
+                    <div class="d3-card-name">Croissant fourré</div>
+                    <div class="d3-card-desc">Beurré, garni, servi chaud</div>
+                  </div>
+                  <div class="d3-card-row">
+                    <div class="d3-card-price">5,50 €</div>
+                    <div class="d3-card-add">Ajouter</div>
+                  </div>
+                </div>
+              </div>
+              <div class="d3-card">
+                <div class="d3-card-img d">🥞</div>
+                <div class="d3-card-body">
+                  <div>
+                    <div class="d3-card-name">Crêpes</div>
+                    <div class="d3-card-desc">Dorées, garnies à la commande</div>
+                  </div>
+                  <div class="d3-card-row">
+                    <div class="d3-card-price">5,90 €</div>
+                    <div class="d3-card-add">Ajouter</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="height: 10px;"></div>
+            <div class="d3-cartbar">
+              <div class="d3-cartbar-left">
+                2 articles
+                <strong>11,80 €</strong>
+              </div>
+              <div class="d3-cartbar-btn">Voir le panier</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <div class="note">
+      <div class="note-title">Points forts</div>
+      <ul>
+        <li>Fort impact typographique</li>
+        <li>Très lisible, très structuré</li>
+        <li>Style éditorial unique</li>
+        <li>Fonctionne même sans grandes photos</li>
+      </ul>
+    </div>
+    <div class="note">
+      <div class="note-title">Points de vigilance</div>
+      <ul>
+        <li class="neg">Moins "appétissant" que les deux autres</li>
+        <li class="neg">Peut sembler froid si mal exécuté</li>
+        <li class="neg">Plus adapté au desktop que au mobile</li>
+      </ul>
+    </div>
+    <div class="note">
+      <div class="note-title">Convient si…</div>
+      <ul>
+        <li>On veut un positionnement éditorial/magazine</li>
+        <li>On n'a pas encore les photos finales</li>
+        <li>On cible une audience plus mature/exigeante</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ── DIRECTION FINALE ── -->
+<div id="df" class="scene active">
+  <div class="scene-header">
+    <h2>Direction Finale — Lumineux Crème + CartBar Rose</h2>
+    <p>Direction 1 comme base, CartBar en rose poudré avec texte et bouton blancs. Le seul élément plein rose de la page = hiérarchie d'action immédiate.</p>
+  </div>
+  <div class="phones">
+    <div class="phone-wrap">
+      <div class="phone-label">Accueil · commande.</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="d1-screen">
+            <div class="d1-header">
+              <div class="d1-logo">Instant <span>Dessert</span></div>
+              <div class="d1-icon">👤</div>
+            </div>
+            <div class="d1-hero">
+              <div class="d1-hero-tag">Dark Kitchen · Hauts-de-Seine</div>
+              <h1>Un dessert,<br><em>tout de suite.</em></h1>
+              <div class="d1-btn">Commander maintenant</div>
+            </div>
+            <div class="d1-habitude">
+              <div class="d1-habitude-icon">⭐</div>
+              <div class="d1-habitude-text">
+                <strong>Votre habituel ?</strong>
+                Riz b-laben + Boisson maison · 11,80 €
+              </div>
+              <div class="d1-habitude-btn">Réajouter</div>
+            </div>
+            <div class="d1-cats">
+              <div class="d1-cat active">Tout</div>
+              <div class="d1-cat">Desserts</div>
+              <div class="d1-cat">Boissons</div>
+              <div class="d1-cat">Viennoiseries</div>
+            </div>
+            <div class="d1-section-title">Nos créations</div>
+            <div class="d1-grid">
+              <div class="d1-card">
+                <div class="d1-card-img a">🍚</div>
+                <div class="d1-card-body">
+                  <div class="d1-card-name">Riz b-laben</div>
+                  <div class="d1-card-sub">Crémeux, fleur d'oranger</div>
+                  <div class="d1-card-row">
+                    <div class="d1-card-price">6,90 €</div>
+                    <div class="d1-card-add">+</div>
+                  </div>
+                </div>
+              </div>
+              <div class="d1-card">
+                <div class="d1-card-img b">🥤</div>
+                <div class="d1-card-body">
+                  <div class="d1-card-name">Boisson maison</div>
+                  <div class="d1-card-sub">Fraîche, artisanale</div>
+                  <div class="d1-card-row">
+                    <div class="d1-card-price">4,90 €</div>
+                    <div class="d1-card-add">+</div>
+                  </div>
+                </div>
+              </div>
+              <div class="d1-card">
+                <div class="d1-card-img c">🥐</div>
+                <div class="d1-card-body">
+                  <div class="d1-card-name">Croissant fourré</div>
+                  <div class="d1-card-sub">Chaud, généreux</div>
+                  <div class="d1-card-row">
+                    <div class="d1-card-price">5,50 €</div>
+                    <div class="d1-card-add">+</div>
+                  </div>
+                </div>
+              </div>
+              <div class="d1-card">
+                <div class="d1-card-img d">🥞</div>
+                <div class="d1-card-body">
+                  <div class="d1-card-name">Crêpes</div>
+                  <div class="d1-card-sub">Dorées, garnies</div>
+                  <div class="d1-card-row">
+                    <div class="d1-card-price">5,90 €</div>
+                    <div class="d1-card-add">+</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- CartBar style Direction 2 : rose + blanc -->
+            <div style="height: 20px;"></div>
+            <div style="position:sticky;bottom:0;background:var(--rose);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-radius:16px 16px 0 0;">
+              <div style="font-size:13px;color:rgba(255,255,255,.85);font-family:'Montserrat',sans-serif;">
+                2 articles
+                <div style="font-size:17px;font-weight:700;color:#fff;">11,80 €</div>
+              </div>
+              <div style="padding:10px 20px;background:#fff;color:var(--rose);border-radius:24px;font-size:13px;font-weight:700;">Voir le panier →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phone-wrap">
+      <div class="phone-label">Panier · récap</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="d1-screen">
+            <div class="d1-header">
+              <div style="font-size:13px;font-weight:600;color:var(--chocolat);">← Retour</div>
+              <div class="d1-logo">Mon panier</div>
+              <div style="width:36px;"></div>
+            </div>
+
+            <!-- Habitude -->
+            <div style="padding:16px 16px 0;">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--chocolat);margin-bottom:12px;">Votre commande</div>
+              <div style="display:flex;flex-direction:column;gap:0;">
+                <!-- item 1 -->
+                <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--blush);">
+                  <div style="width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#f5e6d3,#fdd);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">🍚</div>
+                  <div style="flex:1;">
+                    <div style="font-size:14px;font-weight:600;color:var(--chocolat);">Riz b-laben</div>
+                    <div style="font-size:12px;color:#aaa;">Crémeux, fleur d'oranger</div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="width:26px;height:26px;border-radius:50%;border:1px solid var(--blush);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--chocolat);">−</div>
+                    <div style="font-size:14px;font-weight:600;color:var(--chocolat);">1</div>
+                    <div style="width:26px;height:26px;border-radius:50%;background:var(--rose);display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;">+</div>
+                  </div>
+                  <div style="font-size:14px;font-weight:700;color:var(--chocolat);min-width:44px;text-align:right;">6,90 €</div>
+                </div>
+                <!-- item 2 -->
+                <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--blush);">
+                  <div style="width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#e8f0f5,#d5e8f5);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">🥤</div>
+                  <div style="flex:1;">
+                    <div style="font-size:14px;font-weight:600;color:var(--chocolat);">Boisson maison</div>
+                    <div style="font-size:12px;color:#aaa;">Fraîche, artisanale</div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="width:26px;height:26px;border-radius:50%;border:1px solid var(--blush);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--chocolat);">−</div>
+                    <div style="font-size:14px;font-weight:600;color:var(--chocolat);">1</div>
+                    <div style="width:26px;height:26px;border-radius:50%;background:var(--rose);display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;">+</div>
+                  </div>
+                  <div style="font-size:14px;font-weight:700;color:var(--chocolat);min-width:44px;text-align:right;">4,90 €</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mode livraison -->
+            <div style="padding:16px;">
+              <div style="font-size:13px;font-weight:600;color:var(--chocolat);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.5px;">Mode de récupération</div>
+              <div style="display:flex;gap:8px;">
+                <div style="flex:1;padding:12px;border:2px solid var(--rose);border-radius:12px;text-align:center;">
+                  <div style="font-size:18px;margin-bottom:4px;">📍</div>
+                  <div style="font-size:12px;font-weight:700;color:var(--rose);">Click & Collect</div>
+                  <div style="font-size:11px;color:#aaa;">Gratuit · 15 min</div>
+                </div>
+                <div style="flex:1;padding:12px;border:1px solid var(--blush);border-radius:12px;text-align:center;">
+                  <div style="font-size:18px;margin-bottom:4px;">🛵</div>
+                  <div style="font-size:12px;font-weight:600;color:var(--chocolat);">Livraison</div>
+                  <div style="font-size:11px;color:#aaa;">+2,50 € · 30 min</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Récap prix -->
+            <div style="padding:0 16px 16px;">
+              <div style="background:var(--blush);border-radius:12px;padding:14px;">
+                <div style="display:flex;justify-content:space-between;font-size:13px;color:#888;margin-bottom:6px;"><span>Sous-total</span><span>11,80 €</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:13px;color:#888;margin-bottom:10px;"><span>Frais de service</span><span>0,00 €</span></div>
+                <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:700;color:var(--chocolat);border-top:1px solid rgba(43,26,20,.1);padding-top:10px;"><span>Total</span><span>11,80 €</span></div>
+              </div>
+            </div>
+
+            <!-- CartBar rose -->
+            <div style="position:sticky;bottom:0;background:var(--rose);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;border-radius:16px 16px 0 0;">
+              <div style="font-size:13px;color:rgba(255,255,255,.85);font-family:'Montserrat',sans-serif;">
+                11,80 €
+                <div style="font-size:11px;font-weight:400;color:rgba(255,255,255,.7);">Click & Collect</div>
+              </div>
+              <div style="padding:11px 24px;background:#fff;color:var(--rose);border-radius:24px;font-size:13px;font-weight:700;">Payer →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <div class="note">
+      <div class="note-title">Ce qui change vs Direction 1</div>
+      <ul>
+        <li>CartBar : fond rose #D97773 au lieu de chocolat</li>
+        <li>Bouton panier : blanc avec texte rose (inversion)</li>
+        <li>Seul élément rose plein sur la page = hiérarchie CTA maximale</li>
+      </ul>
+    </div>
+    <div class="note">
+      <div class="note-title">Décision confirmée</div>
+      <ul>
+        <li>Layout Direction 1 — fond crème, cards blanches</li>
+        <li>CartBar Direction 2 — rose + blanc</li>
+        <li>Bouton "Ajouter" sur cards : rose (cohérence)</li>
+        <li>2ème écran : vue panier avec modes de livraison</li>
+      </ul>
+    </div>
+    <div class="note">
+      <div class="note-title">Cohérence design system</div>
+      <ul>
+        <li>Rose = toutes les actions primaires</li>
+        <li>Chocolat = texte, titres, fond CartBar secondaire</li>
+        <li>Crème = fond pages</li>
+        <li>Blush = fonds cards récap, tags</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
