@@ -3,7 +3,7 @@ import { NextResponse, type NextRequest } from 'next/server'
 
 // Vitrine publique + pages auth accessibles sans connexion
 // Le dashboard et les commandes nécessitent une authentification
-const PUBLIC_PREFIXES = ['/', '/acces', '/connexion', '/inscription']
+const PUBLIC_PREFIXES = ['/', '/acces', '/connexion', '/inscription', '/mot-de-passe-oublie', '/reinitialiser', '/auth']
 
 export async function middleware(request: NextRequest) {
   const { supabaseResponse, user } = await updateSession(request)
