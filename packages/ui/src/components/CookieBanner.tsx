@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import Script from 'next/script'
 
 const STORAGE_KEY = 'cookie_consent'
@@ -9,8 +10,10 @@ type ConsentValue = 'accepted' | 'refused'
 export function CookieBanner() {
   const [consent, setConsent] = useState<ConsentValue | null>(null)
   const [visible, setVisible] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     const stored = localStorage.getItem(STORAGE_KEY) as ConsentValue | null
     if (stored) {
       setConsent(stored)
@@ -42,7 +45,7 @@ export function CookieBanner() {
         />
       )}
 
-      {visible && (
+      {mounted && visible && createPortal(
         <div
           role="dialog"
           aria-labelledby="cookie-banner-title"
@@ -70,7 +73,8 @@ export function CookieBanner() {
               Accepter
             </button>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   )

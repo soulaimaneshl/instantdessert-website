@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 interface BottomSheetProps {
   open: boolean
@@ -11,6 +12,11 @@ interface BottomSheetProps {
 
 export function BottomSheet({ open, onClose, title, children }: BottomSheetProps) {
   const sheetRef = useRef<HTMLDivElement>(null)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     if (!open) return
@@ -24,9 +30,9 @@ export function BottomSheet({ open, onClose, title, children }: BottomSheetProps
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [open, onClose])
 
-  if (!open) return null
+  if (!mounted || !open) return null
 
-  return (
+  return createPortal(
     <>
       {/* Backdrop */}
       <div
@@ -66,6 +72,7 @@ export function BottomSheet({ open, onClose, title, children }: BottomSheetProps
         {/* Contenu */}
         <div className="px-5 py-5">{children}</div>
       </div>
-    </>
+    </>,
+    document.body
   )
 }
