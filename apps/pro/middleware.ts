@@ -1,14 +1,17 @@
 import { updateSession } from '@instantdessert/supabase/middleware'
 import { NextResponse, type NextRequest } from 'next/server'
 
-// Le portail pro est entièrement protégé — seuls /connexion et /inscription sont publics
-const PUBLIC_ROUTES = ['/connexion', '/inscription']
+// Vitrine publique + pages auth accessibles sans connexion
+// Le dashboard et les commandes nécessitent une authentification
+const PUBLIC_PREFIXES = ['/', '/acces', '/connexion', '/inscription']
 
 export async function middleware(request: NextRequest) {
   const { supabaseResponse, user } = await updateSession(request)
 
   const pathname = request.nextUrl.pathname
-  const isPublic = PUBLIC_ROUTES.includes(pathname)
+  const isPublic = PUBLIC_PREFIXES.some(p =>
+    p === '/' ? pathname === '/' : pathname.startsWith(p)
+  )
 
   if (!user && !isPublic) {
     const url = request.nextUrl.clone()
