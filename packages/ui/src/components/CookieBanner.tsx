@@ -50,7 +50,7 @@ export function CookieBanner() {
           role="dialog"
           aria-labelledby="cookie-banner-title"
           aria-modal="false"
-          className="fixed bottom-0 left-0 right-0 z-50 bg-chocolat text-creme px-4 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+          className="fixed bottom-0 left-0 right-0 z-50 bg-chocolat text-creme px-4 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-t-2 border-rose/60 shadow-[0_-4px_24px_rgba(0,0,0,0.4)]"
         >
           <p id="cookie-banner-title" className="font-body text-sm leading-relaxed">
             Nous utilisons des cookies analytiques pour améliorer votre expérience.{' '}
