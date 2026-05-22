@@ -71,21 +71,18 @@ export default async function ProductPage({ params }: Props) {
               <p className="font-body text-xs text-rose uppercase tracking-widest mb-1">Association parfaite</p>
               <h2 className="font-display text-2xl text-chocolat">Souvent dégustés avec</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div className="flex gap-4 overflow-x-auto pb-4 -mx-6 px-6 snap-x snap-mandatory scroll-smooth">
               {pairings.map(p => (
                 <Link key={p.id} href={`/catalogue/${p.id}`}
-                  className="group flex items-center gap-4 bg-white border border-blush rounded-2xl p-4 hover:shadow-md hover:border-rose/30 transition-all">
-                  <div className="w-16 h-16 rounded-xl bg-blush/20 flex items-center justify-center shrink-0 group-hover:bg-blush/30 transition-colors">
-                    <span className="text-2xl">🧁</span>
+                  className="group shrink-0 w-52 snap-start bg-white border border-blush rounded-2xl overflow-hidden hover:shadow-md hover:border-rose/30 transition-all flex flex-col">
+                  <div className="aspect-square bg-blush/20 flex items-center justify-center group-hover:bg-blush/30 transition-colors">
+                    <span className="text-5xl">🧁</span>
                   </div>
-                  <div className="flex-1 min-w-0">
+                  <div className="p-4 flex flex-col flex-1 gap-1">
                     <p className="font-body text-xs text-rose uppercase tracking-wider">{p.categorie}</p>
-                    <p className="font-display text-lg text-chocolat leading-snug">{p.nom}</p>
-                    <p className="font-body text-xs text-chocolat/50 truncate">{p.description}</p>
-                  </div>
-                  <div className="text-right shrink-0">
-                    <p className="font-display text-lg text-caramel">{p.prix.toFixed(2)} €</p>
-                    <p className="font-body text-xs text-rose group-hover:underline">Voir →</p>
+                    <p className="font-display text-base text-chocolat leading-snug">{p.nom}</p>
+                    <p className="font-body text-xs text-chocolat/50 leading-snug flex-1">{p.description}</p>
+                    <p className="font-display text-lg text-caramel mt-2">{p.prix.toFixed(2)} €</p>
                   </div>
                 </Link>
               ))}

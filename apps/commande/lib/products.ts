@@ -20,7 +20,7 @@ export const PRODUCTS: Product[] = [
     prix: 6.90,
     allergenes: ['Gluten', 'Œufs', 'Lait'],
     poids: '120g',
-    pairings: ['2', '8'],
+    pairings: ['2', '5', '7', '8'],
   },
   {
     id: '2',
@@ -31,7 +31,7 @@ export const PRODUCTS: Product[] = [
     prix: 7.50,
     allergenes: ['Gluten', 'Œufs', 'Lait', 'Fruits à coque'],
     poids: '150g',
-    pairings: ['1', '4'],
+    pairings: ['1', '4', '5', '8'],
   },
   {
     id: '3',
@@ -42,7 +42,7 @@ export const PRODUCTS: Product[] = [
     prix: 5.90,
     allergenes: ['Gluten', 'Œufs', 'Lait'],
     poids: '80g',
-    pairings: ['6', '5'],
+    pairings: ['6', '5', '7', '8'],
   },
   {
     id: '4',
@@ -53,7 +53,7 @@ export const PRODUCTS: Product[] = [
     prix: 7.20,
     allergenes: ['Gluten', 'Œufs', 'Lait'],
     poids: '130g',
-    pairings: ['1', '2'],
+    pairings: ['1', '2', '6', '8'],
   },
   {
     id: '5',
@@ -64,7 +64,7 @@ export const PRODUCTS: Product[] = [
     prix: 5.50,
     allergenes: ['Gluten', 'Œufs', 'Lait'],
     poids: '90g',
-    pairings: ['3', '8'],
+    pairings: ['3', '7', '8', '2'],
   },
   {
     id: '6',
@@ -75,7 +75,7 @@ export const PRODUCTS: Product[] = [
     prix: 7.90,
     allergenes: ['Gluten', 'Œufs', 'Lait', 'Fruits à coque'],
     poids: '125g',
-    pairings: ['1', '4'],
+    pairings: ['1', '4', '7', '8'],
   },
   {
     id: '7',
@@ -86,7 +86,7 @@ export const PRODUCTS: Product[] = [
     prix: 5.20,
     allergenes: ['Œufs', 'Lait'],
     poids: '100g',
-    pairings: ['3', '8'],
+    pairings: ['3', '5', '8', '2'],
   },
   {
     id: '8',
@@ -97,7 +97,7 @@ export const PRODUCTS: Product[] = [
     prix: 3.50,
     allergenes: ['Gluten', 'Œufs', 'Lait', 'Fruits à coque'],
     poids: '60g',
-    pairings: ['1', '5'],
+    pairings: ['1', '5', '3', '6'],
   },
 ]
 
