@@ -1,0 +1,16 @@
+{
+  "name": "@instantdessert/supabase",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./server": "./src/server.ts"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.6.1",
+    "@supabase/supabase-js": "^2.49.4"
+  },
+  "peerDependencies": {
+    "next": ">=16.0.0"
+  }
+}

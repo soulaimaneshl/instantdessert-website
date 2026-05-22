@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@instantdessert/supabase": "*",
     "@instantdessert/ui": "*",
     "next": "16.2.6",
     "react": "^19.0.0",
