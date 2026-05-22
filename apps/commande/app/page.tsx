@@ -22,16 +22,8 @@ export default function CommandePage() {
       <header className="sticky top-0 z-30 bg-creme/90 backdrop-blur border-b border-blush">
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
           <Logo size={32} />
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/catalogue" className="font-body text-sm text-chocolat/60 hover:text-chocolat transition-colors">
-              Catalogue
-            </Link>
-            <Link href="/panier" className="font-body text-sm text-chocolat/60 hover:text-chocolat transition-colors">
-              Panier
-            </Link>
-          </nav>
           <Link href="/catalogue"
-            className="min-h-[44px] inline-flex items-center px-5 py-2 bg-rose text-white font-body text-sm rounded-full hover:opacity-90 transition-opacity">
+            className="min-h-[44px] inline-flex items-center px-6 py-2 bg-rose text-white font-body text-sm rounded-full hover:opacity-90 transition-opacity">
             Commander →
           </Link>
         </div>
