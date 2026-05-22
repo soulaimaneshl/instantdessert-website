@@ -1,0 +1,54 @@
+/*
+ * Instant Dessert — Design Tokens
+ * Importé dans globals.css de chaque app après @import "tailwindcss"
+ */
+
+@theme {
+  /* ── Couleurs de marque ─────────────────────────────────────────────────── */
+  /* Génère bg-chocolat, text-chocolat, border-chocolat, ring-chocolat, etc. */
+  --color-chocolat: #2B1A14;
+  --color-creme:    #FFF7EE;
+  --color-rose:     #D97773;
+  --color-caramel:  #C8953E;
+  --color-blush:    #FCE7E3;
+
+  /* ── Typographie ────────────────────────────────────────────────────────── */
+  /* Utilisées via font-display et font-body en Tailwind */
+  --font-display: var(--font-cormorant-garamond, 'Cormorant Garamond', serif);
+  --font-body:    var(--font-montserrat, 'Montserrat', sans-serif);
+}
+
+/* ── Variables shadcn/ui — overrides charte Instant Dessert ─────────────── */
+:root {
+  --background:         #FFF7EE;
+  --foreground:         #2B1A14;
+  --primary:            #D97773;
+  --primary-foreground: #FFF7EE;
+  --accent:             #C8953E;
+  --accent-foreground:  #2B1A14;
+  --muted:              #FCE7E3;
+  --muted-foreground:   #7a5c54;
+  --border:             #e8d5cf;
+  --ring:               #D97773;
+  --radius:             0.75rem;
+}
+
+/* ── Focus visible — tous les éléments interactifs ──────────────────────── */
+@layer base {
+  *:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #FFF7EE, 0 0 0 4px #D97773;
+  }
+}
+
+/* ── prefers-reduced-motion — désactive toutes les animations ───────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
