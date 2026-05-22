@@ -2,10 +2,21 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@instantdessert/supabase/server'
 import { OrderForm } from './OrderForm'
 
-export default async function NouvellePage() {
+interface Props {
+  searchParams: Promise<{ q?: string; draft_id?: string }>
+}
+
+export default async function NouvellePage({ searchParams }: Props) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/connexion')
+
+  const { q, draft_id } = await searchParams
+  const initialQuantities: Record<string, number> = {}
+  q?.split(',').forEach(pair => {
+    const [id, qty] = pair.split(':')
+    if (id && qty) initialQuantities[id] = parseInt(qty)
+  })
 
   return (
     <main className="min-h-screen bg-creme">
@@ -15,7 +26,7 @@ export default async function NouvellePage() {
             ← Mes commandes
           </a>
         </div>
-        <OrderForm />
+        <OrderForm initialQuantities={initialQuantities} draftId={draft_id} />
       </div>
     </main>
   )
