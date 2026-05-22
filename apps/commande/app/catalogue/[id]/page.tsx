@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { Logo } from '@instantdessert/ui'
 import { getProduct, getPairings, PRODUCTS } from '../../../lib/products'
+import { Header } from '../../components/Header'
+import { AddToCartButton } from '../components/AddToCartButton'
 
 interface Props {
   params: Promise<{ id: string }>
@@ -20,20 +21,7 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <>
-      <header className="sticky top-0 z-30 bg-creme/90 backdrop-blur border-b border-blush">
-        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/"><Logo size={32} /></Link>
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="/catalogue" className="font-body text-sm text-chocolat/60 hover:text-chocolat transition-colors">Catalogue</Link>
-            <Link href="/panier" className="font-body text-sm text-chocolat/60 hover:text-chocolat transition-colors">Panier</Link>
-          </nav>
-          <Link href="/panier"
-            className="min-h-[44px] inline-flex items-center px-5 py-2 bg-rose text-white font-body text-sm rounded-full hover:opacity-90 transition-opacity">
-            Panier
-          </Link>
-        </div>
-      </header>
-
+      <Header activePage="catalogue" />
       <main className="max-w-5xl mx-auto px-6 py-10 space-y-16">
 
         {/* Fil d'Ariane */}
@@ -47,12 +35,10 @@ export default async function ProductPage({ params }: Props) {
 
         {/* Fiche produit */}
         <div className="grid md:grid-cols-2 gap-10 items-start">
-          {/* Image */}
           <div className="aspect-square bg-blush/20 rounded-3xl flex items-center justify-center">
             <span className="text-9xl">🧁</span>
           </div>
 
-          {/* Infos */}
           <div className="space-y-6">
             <div>
               <p className="font-body text-xs text-rose uppercase tracking-widest mb-2">{product.categorie}</p>
@@ -65,7 +51,6 @@ export default async function ProductPage({ params }: Props) {
               <span className="font-body text-sm text-chocolat/40">{product.poids}</span>
             </div>
 
-            {/* Allergènes */}
             <div>
               <p className="font-body text-xs text-chocolat/40 uppercase tracking-wider mb-2">Allergènes</p>
               <div className="flex flex-wrap gap-2">
@@ -75,17 +60,7 @@ export default async function ProductPage({ params }: Props) {
               </div>
             </div>
 
-            {/* CTA */}
-            <div className="pt-2 space-y-3">
-              <Link href={`/panier?ajouter=${product.id}`}
-                className="min-h-[52px] flex items-center justify-center w-full bg-chocolat text-creme font-body text-sm rounded-full hover:opacity-80 transition-opacity">
-                Ajouter au panier — {product.prix.toFixed(2)} €
-              </Link>
-              <Link href="/catalogue"
-                className="min-h-[44px] flex items-center justify-center w-full border border-chocolat/20 text-chocolat font-body text-sm rounded-full hover:border-chocolat transition-colors">
-                ← Continuer mes achats
-              </Link>
-            </div>
+            <AddToCartButton product={product} />
           </div>
         </div>
 
