@@ -1,0 +1,4 @@
+{
+  "extends": "@instantdessert/config/tsconfig/nextjs",
+  "include": ["src"]
+}

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@instantdessert/email": "*",
     "@instantdessert/supabase": "*",
     "@instantdessert/ui": "*",
     "next": "16.2.6",

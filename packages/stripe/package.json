@@ -1,0 +1,11 @@
+{
+  "name": "@instantdessert/stripe",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "stripe": "^17.0.0"
+  }
+}
