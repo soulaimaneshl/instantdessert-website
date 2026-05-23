@@ -2,6 +2,8 @@
 
 import { createClient } from '@instantdessert/supabase'
 import { useRouter } from 'next/navigation'
+import { useCart } from '../../lib/cart'
+import { PRODUCTS } from '../../lib/products'
 import Link from 'next/link'
 
 interface Props {
@@ -10,14 +12,50 @@ interface Props {
   createdAt: string
 }
 
+// Commandes fictives pour la preview — remplacées par Supabase une fois configuré
+const MOCK_COMMANDES = [
+  {
+    id: 'CMD-2024-001',
+    date: '2026-05-20',
+    total: 26.50,
+    statut: 'Livré',
+    items: [
+      { productId: '2', nom: 'Paris-Brest praliné', prix: 7.50, quantite: 1 },
+      { productId: '3', nom: 'Fondant chocolat noir 70%', prix: 5.90, quantite: 2 },
+      { productId: '4', nom: 'Millefeuille vanille Bourbon', prix: 7.20, quantite: 1 },
+    ],
+  },
+  {
+    id: 'CMD-2024-002',
+    date: '2026-05-15',
+    total: 14.40,
+    statut: 'Livré',
+    items: [
+      { productId: '1', nom: 'Tarte au citron meringuée', prix: 6.90, quantite: 1 },
+      { productId: '8', nom: 'Financier amande & miel', prix: 3.50, quantite: 2 },
+    ],
+  },
+]
+
 export function CompteClient({ email, prenom, createdAt }: Props) {
   const router = useRouter()
+  const { addItem } = useCart()
 
   async function handleSignOut() {
     const supabase = createClient()
     await supabase.auth.signOut()
     router.push('/')
     router.refresh()
+  }
+
+  function handleReorder(items: typeof MOCK_COMMANDES[0]['items']) {
+    items.forEach(item => {
+      const product = PRODUCTS.find(p => p.id === item.productId)
+      if (product) {
+        for (let i = 0; i < item.quantite; i++) addItem(product)
+      }
+    })
+    router.push('/panier')
   }
 
   const initiale = prenom ? prenom[0].toUpperCase() : email[0].toUpperCase()
@@ -70,22 +108,51 @@ export function CompteClient({ email, prenom, createdAt }: Props) {
       <div className="md:col-span-2 space-y-4">
         <h2 className="font-display text-xl text-chocolat">Mes commandes</h2>
 
-        <div className="bg-white border border-blush rounded-2xl p-12 text-center space-y-4">
-          <div className="w-16 h-16 rounded-full bg-blush flex items-center justify-center mx-auto">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-chocolat/40">
-              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <path d="M16 10a4 4 0 01-8 0"/>
-            </svg>
-          </div>
-          <div>
-            <p className="font-display text-xl text-chocolat/50">Aucune commande pour l'instant</p>
-            <p className="font-body text-sm text-chocolat/30 mt-1">Vos prochaines commandes apparaîtront ici</p>
-          </div>
-          <Link href="/catalogue"
-            className="min-h-[44px] inline-flex items-center px-8 py-3 border border-blush text-chocolat font-body text-sm rounded-full hover:border-chocolat transition-colors">
-            Découvrir nos délices →
-          </Link>
+        <div className="space-y-4">
+          {MOCK_COMMANDES.map(cmd => (
+            <div key={cmd.id} className="bg-white border border-blush rounded-2xl overflow-hidden">
+              {/* En-tête commande */}
+              <div className="flex items-center justify-between px-5 py-4 border-b border-blush bg-blush/10">
+                <div className="flex items-center gap-4">
+                  <div>
+                    <p className="font-body text-xs text-chocolat/50 uppercase tracking-wide">Commande</p>
+                    <p className="font-body text-sm text-chocolat font-medium">#{cmd.id}</p>
+                  </div>
+                  <div>
+                    <p className="font-body text-xs text-chocolat/50 uppercase tracking-wide">Date</p>
+                    <p className="font-body text-sm text-chocolat">
+                      {new Date(cmd.date).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-body text-xs text-chocolat/50 uppercase tracking-wide">Total</p>
+                    <p className="font-display text-base text-caramel">{cmd.total.toFixed(2)} €</p>
+                  </div>
+                </div>
+                <span className="font-body text-xs text-green-700 bg-green-50 border border-green-200 px-3 py-1 rounded-full">
+                  {cmd.statut}
+                </span>
+              </div>
+
+              {/* Articles */}
+              <div className="px-5 py-3 space-y-2">
+                {cmd.items.map(item => (
+                  <div key={item.productId} className="flex justify-between items-center">
+                    <span className="font-body text-sm text-chocolat/70">{item.nom} ×{item.quantite}</span>
+                    <span className="font-body text-sm text-chocolat">{(item.prix * item.quantite).toFixed(2)} €</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Action */}
+              <div className="px-5 py-4 border-t border-blush">
+                <button onClick={() => handleReorder(cmd.items)}
+                  className="min-h-[40px] px-5 inline-flex items-center font-body text-sm bg-rose text-white rounded-full hover:opacity-90 transition-opacity">
+                  Re-commander →
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 

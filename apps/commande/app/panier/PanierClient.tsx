@@ -6,7 +6,7 @@ import { PRODUCTS } from '../../lib/products'
 import type { Product } from '../../lib/products'
 
 export function PanierClient() {
-  const { items, removeItem, updateQuantity, total, count } = useCart()
+  const { items, removeItem, updateQuantity, clear, total, count } = useCart()
 
   const suggestions: Product[] = PRODUCTS
     .filter(p => !items.some(i => i.productId === p.id))
@@ -42,9 +42,15 @@ export function PanierClient() {
 
         {/* Articles */}
         <div className="md:col-span-2 space-y-4">
-          <h2 className="font-display text-xl text-chocolat">
-            {count} article{count > 1 ? 's' : ''} dans votre panier
-          </h2>
+          <div className="flex items-center justify-between">
+            <h2 className="font-display text-xl text-chocolat">
+              {count} article{count > 1 ? 's' : ''} dans votre panier
+            </h2>
+            <button onClick={clear}
+              className="font-body text-xs text-chocolat/40 hover:text-red-400 transition-colors underline underline-offset-2">
+              Vider le panier
+            </button>
+          </div>
           <div className="divide-y divide-blush border border-blush rounded-2xl overflow-hidden">
             {items.map(item => (
               <div key={item.productId} className="flex items-center gap-4 px-5 py-4 bg-white">
