@@ -1,9 +1,16 @@
 import { updateSession } from '@instantdessert/supabase/middleware'
-import type { NextRequest } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 
-// Le portail est public — on rafraîchit juste la session pour les Server Components
 export async function middleware(request: NextRequest) {
-  const { supabaseResponse } = await updateSession(request)
+  const { supabaseResponse, user } = await updateSession(request)
+
+  const pathname = request.nextUrl.pathname
+  if (pathname.startsWith('/admin') && !user && process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    const url = request.nextUrl.clone()
+    url.pathname = '/admin/connexion'
+    return NextResponse.redirect(url)
+  }
+
   return supabaseResponse
 }
 
