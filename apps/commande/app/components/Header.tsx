@@ -38,23 +38,40 @@ export function Header({ activePage }: Props) {
 
   return (
     <header className="sticky top-0 z-30 bg-creme/90 backdrop-blur border-b border-blush">
-      <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-5xl mx-auto px-6 h-16 flex items-center gap-4">
         <Link href="/"><Logo size={32} /></Link>
 
-        <nav className="flex items-center gap-2">
-          <Link href="/catalogue"
-            className={`min-h-[36px] px-4 inline-flex items-center font-body text-sm rounded-full transition-colors ${
-              activePage === 'catalogue'
-                ? 'bg-blush text-chocolat font-medium'
-                : 'text-chocolat/60 hover:text-chocolat hover:bg-blush/50'
-            }`}>
-            Catalogue
-          </Link>
+        <Link href="/catalogue"
+          className={`min-h-[40px] px-5 inline-flex items-center font-body text-sm rounded-full transition-all ${
+            activePage === 'catalogue'
+              ? 'bg-rose text-white hover:opacity-90'
+              : 'border border-chocolat/30 text-chocolat hover:border-chocolat'
+          }`}>
+          Catalogue
+        </Link>
+
+        <div className="flex-1 flex items-center justify-end gap-3">
+
+          {prenom ? (
+            <>
+              <span className="font-body text-sm text-chocolat/60">
+                Bonjour, <span className="text-chocolat font-medium">{prenom}</span>
+              </span>
+              <button onClick={handleSignOut}
+                className="min-h-[40px] px-5 inline-flex items-center font-body text-sm border border-chocolat/30 text-chocolat rounded-full hover:border-chocolat transition-colors">
+                Déconnexion
+              </button>
+            </>
+          ) : (
+            <Link href="/connexion"
+              className="min-h-[40px] px-5 inline-flex items-center font-body text-sm bg-rose text-white rounded-full hover:opacity-90 transition-opacity">
+              Connexion
+            </Link>
+          )}
 
           {count > 0 && (
-            <Link href="/panier"
-              className="relative min-h-[36px] w-10 inline-flex items-center justify-center rounded-full text-chocolat/60 hover:text-chocolat hover:bg-blush/50 transition-colors">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <Link href="/panier" className="relative inline-flex items-center justify-center w-9 h-9 text-chocolat/60 hover:text-chocolat transition-colors">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                 <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
                 <line x1="3" y1="6" x2="21" y2="6"/>
                 <path d="M16 10a4 4 0 01-8 0"/>
@@ -64,25 +81,7 @@ export function Header({ activePage }: Props) {
               </span>
             </Link>
           )}
-
-          {prenom ? (
-            <div className="flex items-center gap-2 ml-1">
-              <Link href="/compte"
-                className="min-h-[36px] px-4 inline-flex items-center font-body text-sm text-chocolat/60 hover:text-chocolat rounded-full hover:bg-blush/50 transition-colors">
-                {prenom}
-              </Link>
-              <button onClick={handleSignOut}
-                className="font-body text-xs text-chocolat/30 hover:text-chocolat/60 transition-colors px-1">
-                Déconnexion
-              </button>
-            </div>
-          ) : (
-            <Link href="/connexion"
-              className="ml-1 min-h-[36px] px-4 inline-flex items-center font-body text-sm bg-chocolat text-creme rounded-full hover:opacity-80 transition-opacity">
-              Connexion
-            </Link>
-          )}
-        </nav>
+        </div>
       </div>
     </header>
   )
