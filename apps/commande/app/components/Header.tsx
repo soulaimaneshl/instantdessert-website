@@ -43,10 +43,10 @@ export function Header({ activePage }: Props) {
 
         <div className="flex-1 flex items-center justify-center">
           <Link href="/catalogue"
-            className={`min-h-[40px] px-5 inline-flex items-center font-body text-sm rounded-full transition-all ${
+            className={`font-body text-sm transition-colors ${
               activePage === 'catalogue'
-                ? 'bg-rose text-white hover:opacity-90'
-                : 'border border-chocolat/30 text-chocolat hover:border-chocolat'
+                ? 'text-chocolat font-medium'
+                : 'text-chocolat/50 hover:text-chocolat'
             }`}>
             Catalogue
           </Link>
