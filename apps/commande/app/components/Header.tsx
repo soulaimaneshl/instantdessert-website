@@ -17,7 +17,7 @@ const activeLinkClass = 'font-body text-sm text-chocolat font-medium'
 export function Header({ activePage }: Props) {
   const { count } = useCart()
   const router = useRouter()
-  const [prenom, setPrenom] = useState<string | null>(null)
+  const [prenom, setPrenom] = useState<string>('')
 
   useEffect(() => {
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return
@@ -44,7 +44,7 @@ export function Header({ activePage }: Props) {
       <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/"><Logo size={32} /></Link>
 
-        <nav className="flex items-center gap-6">
+        <nav className="flex items-center gap-5">
           <Link href="/catalogue" className={activePage === 'catalogue' ? activeLinkClass : linkClass}>
             Catalogue
           </Link>
@@ -59,21 +59,19 @@ export function Header({ activePage }: Props) {
             </Link>
           )}
 
-          {prenom !== null && (
-            prenom ? (
-              <>
-                <Link href="/compte" className={linkClass}>
-                  {prenom}
-                </Link>
-                <button onClick={handleSignOut} className="font-body text-xs text-chocolat/40 hover:text-chocolat transition-colors">
-                  Déconnexion
-                </button>
-              </>
-            ) : (
-              <Link href="/connexion" className={linkClass}>
-                Connexion
+          {prenom ? (
+            <>
+              <Link href="/compte" className={linkClass}>
+                {prenom}
               </Link>
-            )
+              <button onClick={handleSignOut} className="font-body text-xs text-chocolat/40 hover:text-chocolat transition-colors">
+                Déconnexion
+              </button>
+            </>
+          ) : (
+            <Link href="/connexion" className={linkClass}>
+              Connexion
+            </Link>
           )}
         </nav>
       </div>
