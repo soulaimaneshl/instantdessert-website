@@ -28,7 +28,7 @@ export default async function ProductPage({ params }: Props) {
         <nav className="font-body text-sm text-chocolat/40 flex items-center gap-2">
           <Link href="/" className="hover:text-chocolat transition-colors">Accueil</Link>
           <span>/</span>
-          <Link href="/catalogue" className="hover:text-chocolat transition-colors">Catalogue</Link>
+          <Link href="/catalogue" className="hover:text-chocolat transition-colors">Délices</Link>
           <span>/</span>
           <span className="text-chocolat">{product.nom}</span>
         </nav>
