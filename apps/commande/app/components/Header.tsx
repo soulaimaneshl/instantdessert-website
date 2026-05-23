@@ -41,18 +41,17 @@ export function Header({ activePage }: Props) {
       <div className="max-w-5xl mx-auto px-6 h-16 flex items-center gap-6">
         <Link href="/"><Logo size={32} /></Link>
 
-        <div className="flex-1 flex items-center justify-center">
+        <div className="flex-1" />
+
+        <div className="flex items-center gap-3">
           <Link href="/catalogue"
-            className={`font-body text-sm transition-colors ${
+            className={`min-h-[40px] px-5 inline-flex items-center font-body text-sm rounded-full transition-all ${
               activePage === 'catalogue'
-                ? 'text-chocolat font-medium'
-                : 'text-chocolat/50 hover:text-chocolat'
+                ? 'bg-rose/15 text-chocolat font-medium'
+                : 'border border-chocolat/25 text-chocolat hover:border-chocolat/50'
             }`}>
             Catalogue
           </Link>
-        </div>
-
-        <div className="flex items-center gap-3">
 
           {prenom ? (
             <>
