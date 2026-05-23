@@ -12,10 +12,11 @@ export const metadata = { title: 'Créer un compte — Instant Dessert' }
 
 export default async function InscriptionPage({ searchParams }: Props) {
   const { next } = await searchParams
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (user) redirect(next ?? '/catalogue')
+  if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (user) redirect(next ?? '/catalogue')
+  }
 
   return (
     <div className="min-h-screen bg-creme flex flex-col">

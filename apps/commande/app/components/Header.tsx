@@ -17,6 +17,7 @@ export function Header({ activePage }: Props) {
   const [prenom, setPrenom] = useState<string | null>(null)
 
   useEffect(() => {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return
     const supabase = createClient()
     supabase.auth.getSession().then(({ data: { session } }) => {
       setPrenom(session?.user.user_metadata?.prenom ?? null)
@@ -28,6 +29,7 @@ export function Header({ activePage }: Props) {
   }, [])
 
   async function handleSignOut() {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return
     const supabase = createClient()
     await supabase.auth.signOut()
     router.push('/')
