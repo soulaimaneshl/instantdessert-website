@@ -100,7 +100,7 @@ export function PanierClient() {
             <span className="font-display text-lg text-chocolat">Total</span>
             <span className="font-display text-2xl text-chocolat">{total.toFixed(2)} €</span>
           </div>
-          <Link href="/connexion"
+          <Link href="/connexion?next=%2Fpanier%2Fpaiement"
             className="min-h-[52px] flex items-center justify-center w-full bg-rose text-white font-body text-sm rounded-full hover:opacity-90 transition-opacity">
             Passer la commande →
           </Link>

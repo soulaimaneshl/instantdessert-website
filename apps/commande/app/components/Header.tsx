@@ -3,6 +3,9 @@
 import Link from 'next/link'
 import { Logo } from '@instantdessert/ui'
 import { useCart } from '../../lib/cart'
+import { useEffect, useState } from 'react'
+import { createClient } from '@instantdessert/supabase'
+import { useRouter } from 'next/navigation'
 
 interface Props {
   activePage?: 'catalogue' | 'panier'
@@ -10,6 +13,26 @@ interface Props {
 
 export function Header({ activePage }: Props) {
   const { count } = useCart()
+  const router = useRouter()
+  const [prenom, setPrenom] = useState<string | null>(null)
+
+  useEffect(() => {
+    const supabase = createClient()
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setPrenom(session?.user.user_metadata?.prenom ?? null)
+    })
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setPrenom(session?.user.user_metadata?.prenom ?? null)
+    })
+    return () => subscription.unsubscribe()
+  }, [])
+
+  async function handleSignOut() {
+    const supabase = createClient()
+    await supabase.auth.signOut()
+    router.push('/')
+    router.refresh()
+  }
 
   return (
     <header className="sticky top-0 z-30 bg-creme/90 backdrop-blur border-b border-blush">
@@ -21,6 +44,22 @@ export function Header({ activePage }: Props) {
             className={`font-body text-sm transition-colors ${activePage === 'catalogue' ? 'text-chocolat font-medium' : 'text-chocolat/60 hover:text-chocolat'}`}>
             Catalogue
           </Link>
+          {prenom !== null && (
+            prenom ? (
+              <div className="flex items-center gap-3">
+                <Link href="/compte" className="font-body text-sm text-chocolat/60 hover:text-chocolat transition-colors">
+                  Bonjour, {prenom}
+                </Link>
+                <button onClick={handleSignOut} className="font-body text-xs text-chocolat/40 hover:text-chocolat transition-colors">
+                  Déconnexion
+                </button>
+              </div>
+            ) : (
+              <Link href="/connexion" className="font-body text-sm text-chocolat/60 hover:text-chocolat transition-colors">
+                Se connecter
+              </Link>
+            )
+          )}
         </nav>
 
         <Link href="/panier"
