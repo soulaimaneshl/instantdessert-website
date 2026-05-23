@@ -38,19 +38,21 @@ export function Header({ activePage }: Props) {
 
   return (
     <header className="sticky top-0 z-30 bg-creme/90 backdrop-blur border-b border-blush">
-      <div className="max-w-5xl mx-auto px-6 h-16 flex items-center gap-4">
+      <div className="max-w-5xl mx-auto px-6 h-16 flex items-center gap-6">
         <Link href="/"><Logo size={32} /></Link>
 
-        <Link href="/catalogue"
-          className={`min-h-[40px] px-5 inline-flex items-center font-body text-sm rounded-full transition-all ${
-            activePage === 'catalogue'
-              ? 'bg-rose text-white hover:opacity-90'
-              : 'border border-chocolat/30 text-chocolat hover:border-chocolat'
-          }`}>
-          Catalogue
-        </Link>
+        <div className="flex-1 flex items-center justify-center">
+          <Link href="/catalogue"
+            className={`min-h-[40px] px-5 inline-flex items-center font-body text-sm rounded-full transition-all ${
+              activePage === 'catalogue'
+                ? 'bg-rose text-white hover:opacity-90'
+                : 'border border-chocolat/30 text-chocolat hover:border-chocolat'
+            }`}>
+            Catalogue
+          </Link>
+        </div>
 
-        <div className="flex-1 flex items-center justify-end gap-3">
+        <div className="flex items-center gap-3">
 
           {prenom ? (
             <>
