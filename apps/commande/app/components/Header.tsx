@@ -47,7 +47,7 @@ export function Header({ activePage }: Props) {
           <Link href="/catalogue"
             className={`min-h-[40px] px-5 inline-flex items-center font-body text-sm rounded-full transition-all ${
               activePage === 'catalogue'
-                ? 'bg-rose/15 text-chocolat font-medium'
+                ? 'bg-blush text-chocolat font-medium border border-blush'
                 : 'border border-chocolat/25 text-chocolat hover:border-chocolat/50'
             }`}>
             Catalogue
