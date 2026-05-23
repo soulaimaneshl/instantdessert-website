@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Logo, CookieBanner } from '@instantdessert/ui'
+import { Header } from './components/Header'
 
 const FEATURED = [
   { nom: 'Tarte au citron meringuée', categorie: 'Tartes', prix: 6.90, description: 'Citron de Sicile, meringue italienne dorée au chalumeau' },
@@ -18,16 +19,7 @@ const GARANTIES = [
 export default function CommandePage() {
   return (
     <>
-      {/* Header */}
-      <header className="sticky top-0 z-30 bg-creme/90 backdrop-blur border-b border-blush">
-        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Logo size={32} />
-          <Link href="/catalogue"
-            className="min-h-[44px] inline-flex items-center px-6 py-2 bg-rose text-white font-body text-sm rounded-full hover:opacity-90 transition-opacity">
-            Commander →
-          </Link>
-        </div>
-      </header>
+      <Header />
 
       <main>
         {/* Hero */}
