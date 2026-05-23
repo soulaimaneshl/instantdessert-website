@@ -1,7 +1,7 @@
 import { updateSession } from '@instantdessert/supabase/middleware'
 import { NextResponse, type NextRequest } from 'next/server'
 
-const PROTECTED_ROUTES = ['/commandes', '/panier/paiement']
+const PROTECTED_ROUTES = ['/compte', '/commandes', '/panier/paiement']
 
 export async function middleware(request: NextRequest) {
   const { supabaseResponse, user } = await updateSession(request)

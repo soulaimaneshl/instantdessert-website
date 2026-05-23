@@ -6,18 +6,15 @@ import { CompteClient } from './CompteClient'
 export const metadata = { title: 'Mon compte — Instant Dessert' }
 
 export default async function ComptePage() {
-  let email = 'test@instantdessert.fr'
-  let prenom = 'Soulaimane'
-  let createdAt = new Date().toISOString()
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) redirect('/connexion')
 
-  if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-    if (!user) redirect('/connexion')
-    email = user.email ?? ''
-    prenom = user.user_metadata?.prenom ?? ''
-    createdAt = user.created_at
-  }
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) redirect('/connexion')
+
+  const email = user.email ?? ''
+  const prenom = user.user_metadata?.prenom ?? ''
+  const createdAt = user.created_at
 
   return (
     <>
