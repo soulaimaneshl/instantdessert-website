@@ -44,32 +44,44 @@ export function Header({ activePage }: Props) {
       <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/"><Logo size={32} /></Link>
 
-        <nav className="flex items-center gap-5">
-          <Link href="/catalogue" className={activePage === 'catalogue' ? activeLinkClass : linkClass}>
+        <nav className="flex items-center gap-3">
+          <Link href="/catalogue"
+            className={`min-h-[36px] px-4 inline-flex items-center font-body text-sm rounded-full transition-colors ${
+              activePage === 'catalogue'
+                ? 'text-chocolat font-medium bg-blush'
+                : 'text-chocolat/60 hover:text-chocolat hover:bg-blush/50'
+            }`}>
             Catalogue
           </Link>
 
           {count > 0 && (
             <Link href="/panier"
-              className={`relative inline-flex items-center gap-1.5 ${activePage === 'panier' ? activeLinkClass : linkClass}`}>
-              Panier
-              <span className="w-5 h-5 bg-rose rounded-full flex items-center justify-center font-body text-xs text-white font-medium leading-none">
+              className="relative min-h-[36px] w-10 inline-flex items-center justify-center rounded-full text-chocolat/60 hover:text-chocolat hover:bg-blush/50 transition-colors">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M16 10a4 4 0 01-8 0"/>
+              </svg>
+              <span className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 bg-rose rounded-full flex items-center justify-center font-body text-[10px] text-white font-medium leading-none">
                 {count > 9 ? '9+' : count}
               </span>
             </Link>
           )}
 
           {prenom ? (
-            <>
-              <Link href="/compte" className={linkClass}>
+            <div className="flex items-center gap-2">
+              <Link href="/compte"
+                className="min-h-[36px] px-4 inline-flex items-center font-body text-sm text-chocolat/60 hover:text-chocolat rounded-full hover:bg-blush/50 transition-colors">
                 {prenom}
               </Link>
-              <button onClick={handleSignOut} className="font-body text-xs text-chocolat/40 hover:text-chocolat transition-colors">
-                Déconnexion
+              <button onClick={handleSignOut}
+                className="font-body text-xs text-chocolat/30 hover:text-chocolat/60 transition-colors">
+                ×
               </button>
-            </>
+            </div>
           ) : (
-            <Link href="/connexion" className={linkClass}>
+            <Link href="/connexion"
+              className="min-h-[36px] px-4 inline-flex items-center font-body text-sm bg-chocolat text-creme rounded-full hover:opacity-80 transition-opacity">
               Connexion
             </Link>
           )}
