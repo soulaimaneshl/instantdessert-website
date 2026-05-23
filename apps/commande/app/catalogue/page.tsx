@@ -2,7 +2,7 @@ import { PRODUCTS, CATEGORIES } from '../../lib/products'
 import { CatalogueClient } from './components/CatalogueClient'
 import { Header } from '../components/Header'
 
-export const metadata = { title: 'Délices — Instant Dessert' }
+export const metadata = { title: 'Catalogue — Instant Dessert' }
 
 export default function CataloguePage() {
   return (
@@ -11,7 +11,7 @@ export default function CataloguePage() {
       <main className="max-w-5xl mx-auto px-6 py-10">
         <div className="mb-8">
           <a href="/" className="font-body text-sm text-chocolat/40 hover:text-chocolat transition-colors">← Accueil</a>
-          <h1 className="font-display text-3xl text-chocolat mt-2">Nos délices</h1>
+          <h1 className="font-display text-3xl text-chocolat mt-2">Notre catalogue</h1>
           <p className="font-body text-sm text-chocolat/50 mt-1">{PRODUCTS.length} pâtisseries artisanales disponibles aujourd'hui</p>
         </div>
         <CatalogueClient products={PRODUCTS} categories={CATEGORIES} />

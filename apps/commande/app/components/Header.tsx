@@ -50,7 +50,7 @@ export function Header({ activePage }: Props) {
                 ? 'bg-blush text-chocolat font-medium border border-blush'
                 : 'border border-chocolat/25 text-chocolat hover:border-chocolat/50'
             }`}>
-            Délices
+            Catalogue
           </Link>
 
           {prenom ? (
