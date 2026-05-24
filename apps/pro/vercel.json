@@ -1,0 +1,6 @@
+{
+  "buildCommand": "cd ../.. && npx turbo build --filter=@instantdessert/pro",
+  "installCommand": "npm install",
+  "outputDirectory": "apps/pro/.next",
+  "framework": "nextjs"
+}

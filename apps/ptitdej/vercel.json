@@ -1,0 +1,6 @@
+{
+  "buildCommand": "cd ../.. && npx turbo build --filter=@instantdessert/ptitdej",
+  "installCommand": "npm install",
+  "outputDirectory": "apps/ptitdej/.next",
+  "framework": "nextjs"
+}
