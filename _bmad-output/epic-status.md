@@ -6,5 +6,6 @@
 | Epic 2 | Espace Pro B2B | ✅ Done | 2.1 → 2.4 |
 | Epic 3 | Dark Kitchen B2C | ✅ Done | 3.1 → 3.7 |
 | Epic 4 | Administration & Back-office | ✅ Done | 4.1 ✅ · 4.2 ✅ · 4.3 ✅ |
-| Epic 5 | Analytics & Performance | 🔄 In Progress | — |
+| Epic 5 | Analytics & Performance | ✅ Done | 5.1 ✅ · 5.2 ✅ · 5.3 ✅ |
+| Epic 6 | Déploiement & Production | 🔄 In Progress | — |
 | Epic 6 | Déploiement & Production | ⬜ À faire | — |
