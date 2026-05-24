@@ -8,7 +8,7 @@ interface Props {
   searchParams: Promise<{ next?: string }>
 }
 
-export const metadata = { title: 'Connexion — Instant Dessert' }
+export const metadata = { title: 'Connexion', description: 'Connectez-vous à votre compte Instant Dessert pour commander.', robots: { index: false } }
 
 export default async function ConnexionPage({ searchParams }: Props) {
   const { next } = await searchParams
