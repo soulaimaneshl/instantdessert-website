@@ -1,6 +1,7 @@
 import { PRODUCTS, CATEGORIES } from '../../lib/products'
 import { CatalogueClient } from './components/CatalogueClient'
 import { Header } from '../components/Header'
+import { HabitualBanner } from './components/HabitualBanner'
 
 export const metadata = {
   title: 'Nos délices',
@@ -18,6 +19,7 @@ export default function CataloguePage() {
           <h1 className="font-display text-3xl text-chocolat mt-2">Nos délices</h1>
           <p className="font-body text-sm text-chocolat/50 mt-1">{PRODUCTS.length} pâtisseries artisanales disponibles aujourd'hui</p>
         </div>
+        <HabitualBanner />
         <CatalogueClient products={PRODUCTS} categories={CATEGORIES} />
       </main>
     </>
