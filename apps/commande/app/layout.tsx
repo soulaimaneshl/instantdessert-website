@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { cormorantGaramond, montserrat } from '@instantdessert/ui/fonts'
 import { CartProvider } from '../lib/cart'
+import { Analytics } from '@instantdessert/ui'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CartProvider>
           {children}
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   )
