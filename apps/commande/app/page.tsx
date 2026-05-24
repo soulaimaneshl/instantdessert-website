@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Logo, CookieBanner } from '@instantdessert/ui'
 import { Header } from './components/Header'
+import { BrunchTeaser } from './components/BrunchTeaser'
 
 const FEATURED = [
   { nom: 'Tarte au citron meringuée', categorie: 'Tartes', prix: 6.90, description: 'Citron de Sicile, meringue italienne dorée au chalumeau' },
@@ -103,6 +104,9 @@ export default function CommandePage() {
             </Link>
           </div>
         </section>
+
+        {/* Teaser brunch + liste d'attente */}
+        <BrunchTeaser />
 
         {/* Fonctionnement */}
         <section className="bg-chocolat text-creme">
