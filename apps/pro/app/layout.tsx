@@ -4,8 +4,20 @@ import { CookieBanner, Analytics } from '@instantdessert/ui'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Instant Dessert Pro — Espace Partenaires',
-  description: 'Approvisionnez votre établissement en pâtisseries artisanales. Demandez votre accès partenaire.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_PRO_URL ?? 'https://instantdessert.fr'),
+  title: {
+    default: 'Instant Dessert Pro — Espace Partenaires',
+    template: '%s | Instant Dessert Pro',
+  },
+  description: 'Approvisionnez votre établissement en pâtisseries artisanales. Commandes B2B, livraison en Hauts-de-Seine.',
+  openGraph: {
+    type: 'website',
+    siteName: 'Instant Dessert Pro',
+    locale: 'fr_FR',
+    description: 'Espace partenaire Instant Dessert — commandes B2B pour restaurants et établissements.',
+  },
+  twitter: { card: 'summary_large_image' },
+  robots: { index: false, follow: false },
 }
 
 export default function RootLayout({

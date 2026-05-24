@@ -1,11 +1,27 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import type { Metadata } from 'next'
 import { getProduct, getPairings, PRODUCTS } from '../../../lib/products'
 import { Header } from '../../components/Header'
 import { AddToCartButton } from '../components/AddToCartButton'
 
 interface Props {
   params: Promise<{ id: string }>
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params
+  const product = getProduct(id)
+  if (!product) return {}
+  return {
+    title: product.nom,
+    description: product.descriptionLongue,
+    openGraph: {
+      title: `${product.nom} — Instant Dessert`,
+      description: product.descriptionLongue,
+      type: 'website',
+    },
+  }
 }
 
 export async function generateStaticParams() {

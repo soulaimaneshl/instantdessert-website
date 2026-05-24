@@ -4,8 +4,20 @@ import { CookieBanner, Analytics } from '@instantdessert/ui'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Instant Dessert',
-  description: 'Pâtisserie artisanale livrée à domicile en Hauts-de-Seine',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://instantdessert.fr'),
+  title: {
+    default: 'Instant Dessert — Pâtisserie artisanale',
+    template: '%s | Instant Dessert',
+  },
+  description: 'Desserts artisanaux préparés chaque jour et livrés à domicile en Hauts-de-Seine.',
+  openGraph: {
+    type: 'website',
+    siteName: 'Instant Dessert',
+    locale: 'fr_FR',
+    description: 'Desserts artisanaux préparés chaque jour et livrés à domicile en Hauts-de-Seine.',
+  },
+  twitter: { card: 'summary_large_image' },
+  robots: { index: true, follow: true },
 }
 
 export default function RootLayout({

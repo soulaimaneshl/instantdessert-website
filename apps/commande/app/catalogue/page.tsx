@@ -2,7 +2,11 @@ import { PRODUCTS, CATEGORIES } from '../../lib/products'
 import { CatalogueClient } from './components/CatalogueClient'
 import { Header } from '../components/Header'
 
-export const metadata = { title: 'Catalogue — Instant Dessert' }
+export const metadata = {
+  title: 'Nos délices',
+  description: 'Découvrez nos pâtisseries artisanales : tartes, choux, chocolats et classiques préparés chaque jour en Hauts-de-Seine.',
+  openGraph: { title: 'Nos délices — Instant Dessert', description: 'Pâtisseries artisanales livrées à domicile.' },
+}
 
 export default function CataloguePage() {
   return (
