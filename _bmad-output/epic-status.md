@@ -5,7 +5,7 @@
 | Epic | Titre | Milestone | Statut | Stories |
 |---|---|---|---|---|
 | Epic 1 | Fondations & Portail | Pré-M1 | ✅ Done | 1.1 → 1.7 |
-| Epic 2 | Site Pro B2B | M1 | ⚠️ Partiel | 2.1→2.4 ✅ · 2.5 ❌ |
+| Epic 2 | Site Pro B2B | M1 | ✅ Done | 2.1→2.5 ✅ |
 | Epic 3 | Dark Kitchen M1 | M1 | ⚠️ Partiel | 3.1→3.6 ✅ · 3.7 ❌ |
 | Epic 4 | Dark Kitchen M2 — Fidélisation | M2 | 🔄 À faire | 4.1 ❌ · 4.2 ⚠️ · 4.3 ❌ |
 | Epic 5 | Dark Kitchen M3 — Croissance | M3 | ⬜ À faire | 5.1 ❌ · 5.2 ❌ · 5.3 ❌ |
@@ -26,14 +26,14 @@
 | 1.6 | Middleware authentification Next.js | ✅ |
 | 1.7 | Portail de marque instantdessert.fr | ✅ |
 
-### Epic 2 ⚠️ — Site Pro B2B (4/5)
+### Epic 2 ✅ — Site Pro B2B (5/5)
 | Story | Titre | Statut |
 |---|---|---|
 | 2.1 | Catalogue vitrine publique B2B | ✅ |
 | 2.2 | Demande d'accès Espace Pro 3 étapes | ✅ |
 | 2.3 | Authentification Partenaire | ✅ |
 | 2.4 | Composition et validation commande B2B | ✅ |
-| 2.5 | Dashboard Partenaire (historique + rejouer commande) | ❌ À faire |
+| 2.5 | Dashboard Partenaire (historique + rejouer commande) | ✅ (apps/pro/app/commandes/page.tsx) |
 
 ### Epic 3 ⚠️ — Dark Kitchen M1 (6/7)
 | Story | Titre | Statut |
@@ -81,8 +81,7 @@
 ---
 
 ## Prochaines priorités recommandées
-1. **Story 2.5** — Dashboard Pro historique (quick win, app pro déjà faite)
-2. **Story 3.7** — Teaser brunch + waitlist (une section sur la home DK)
-3. **Story 4.1** — HabitualBanner (nécessite Supabase connecté)
-4. **Story 4.3** — Compteur dynamique (nécessite Supabase connecté)
-5. **Epics 5 & 6** — Fidélité, newsletter, parrainage, brunch (Milestone M3/M6)
+1. **Story 3.7** — Teaser brunch + waitlist (une section sur la home DK)
+2. **Story 4.1** — HabitualBanner "Votre habituel ?" (nécessite Supabase connecté)
+3. **Story 4.3** — Compteur dynamique (nécessite Supabase connecté)
+4. **Epics 5 & 6** — Fidélité, newsletter, parrainage, brunch (Milestone M3/M6)
