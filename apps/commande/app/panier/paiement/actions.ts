@@ -10,13 +10,23 @@ interface CartItem {
   quantite: number
 }
 
-export async function createCheckoutSession(items: CartItem[], adresse: string, userId?: string, newsletter?: boolean) {
+export async function createCheckoutSession(
+  items: CartItem[],
+  adresse: string,
+  userId?: string,
+  newsletter?: boolean,
+  referralCode?: string,
+) {
   if (!process.env.STRIPE_SECRET_KEY) {
     redirect('/confirmation?session_id=test_preview')
   }
 
   const stripe = getStripe()
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3002'
+
+  const couponId = referralCode && process.env.STRIPE_REFERRAL_COUPON_ID
+    ? process.env.STRIPE_REFERRAL_COUPON_ID
+    : undefined
 
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',
@@ -33,8 +43,14 @@ export async function createCheckoutSession(items: CartItem[], adresse: string, 
       },
       quantity: item.quantite,
     })),
+    ...(couponId ? { discounts: [{ coupon: couponId }] } : {}),
     shipping_address_collection: { allowed_countries: ['FR'] },
-    metadata: { adresse, user_id: userId ?? '', newsletter: newsletter ? '1' : '0' },
+    metadata: {
+      adresse,
+      user_id: userId ?? '',
+      newsletter: newsletter ? '1' : '0',
+      referral_code: referralCode ?? '',
+    },
     success_url: `${appUrl}/confirmation?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${appUrl}/panier/paiement`,
   })

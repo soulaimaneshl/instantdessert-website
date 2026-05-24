@@ -11,6 +11,7 @@ interface Props {
   prenom: string
   createdAt: string
   points?: number
+  referralCode?: string | null
 }
 
 // Commandes fictives pour la preview — remplacées par Supabase une fois configuré
@@ -38,7 +39,7 @@ const MOCK_COMMANDES = [
   },
 ]
 
-export function CompteClient({ email, prenom, createdAt, points = 0 }: Props) {
+export function CompteClient({ email, prenom, createdAt, points = 0, referralCode }: Props) {
   const router = useRouter()
   const { addItem } = useCart()
 
@@ -120,6 +121,30 @@ export function CompteClient({ email, prenom, createdAt, points = 0 }: Props) {
           </div>
           <p className="font-body text-xs text-chocolat/30 text-right">{points}/100 pts pour le prochain palier</p>
         </div>
+
+        {/* Parrainage */}
+        {referralCode && (
+          <div className="bg-white border border-blush rounded-2xl p-5 space-y-3">
+            <div className="flex items-center justify-between">
+              <p className="font-display text-base text-chocolat">Parrainer un ami</p>
+              <span className="font-body text-xs text-caramel uppercase tracking-widest">-5€</span>
+            </div>
+            <p className="font-body text-xs text-chocolat/50 leading-snug">
+              Partagez votre code. Votre ami obtient 5€ de réduction sur sa première commande, vous gagnez 10 points.
+            </p>
+            <div className="flex items-center gap-2">
+              <span className="flex-1 font-body text-sm text-chocolat font-semibold tracking-widest bg-blush/40 border border-blush rounded-lg px-4 py-2 text-center">
+                {referralCode}
+              </span>
+              <button
+                onClick={() => navigator.clipboard.writeText(referralCode)}
+                className="min-h-[40px] px-4 font-body text-xs bg-chocolat text-creme rounded-lg hover:opacity-80 transition-opacity shrink-0"
+              >
+                Copier
+              </button>
+            </div>
+          </div>
+        )}
 
         <Link href="/catalogue"
           className="min-h-[44px] flex items-center justify-center px-6 py-3 bg-rose text-white font-body text-sm rounded-full hover:opacity-90 transition-opacity">

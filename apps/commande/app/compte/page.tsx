@@ -17,19 +17,28 @@ export default async function ComptePage() {
   const createdAt = user.created_at
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data: solde } = await (supabase as any)
-    .from('fidelite_solde')
-    .select('total_points')
-    .eq('user_id', user.id)
-    .single()
+  const sb = supabase as any
+
+  const [{ data: solde }, { data: referral }] = await Promise.all([
+    sb.from('fidelite_solde').select('total_points').eq('user_id', user.id).single(),
+    sb.from('referral_codes').select('code').eq('user_id', user.id).single(),
+  ])
+
   const totalPoints: number = solde?.total_points ?? 0
+  const referralCode: string | null = referral?.code ?? null
 
   return (
     <>
       <Header />
       <main className="max-w-5xl mx-auto px-6 py-10">
         <h1 className="font-display text-3xl text-chocolat mb-8">Mon compte</h1>
-        <CompteClient email={email} prenom={prenom} createdAt={createdAt} points={totalPoints} />
+        <CompteClient
+          email={email}
+          prenom={prenom}
+          createdAt={createdAt}
+          points={totalPoints}
+          referralCode={referralCode}
+        />
       </main>
     </>
   )

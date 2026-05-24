@@ -117,4 +117,27 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     const email = session.customer_details?.email ?? ''
     if (email) await subscribeToNewsletter(email, prenom || undefined)
   }
+
+  // Parrainage — récompense le parrain + incrémente uses_count
+  const referralCode = session.metadata?.referral_code
+  if (referralCode) {
+    const { data: ref } = await supabase
+      .from('referral_codes')
+      .select('id, user_id, uses_count')
+      .eq('code', referralCode)
+      .single()
+
+    if (ref) {
+      await supabase
+        .from('referral_codes')
+        .update({ uses_count: (ref.uses_count ?? 0) + 1 })
+        .eq('id', ref.id)
+
+      // 10 pts bonus pour le parrain
+      await supabase.from('fidelite_points').insert({
+        user_id: ref.user_id,
+        points: 10,
+      })
+    }
+  }
 }

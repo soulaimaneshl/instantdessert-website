@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useCart } from '../../../lib/cart'
 import { createCheckoutSession } from './actions'
+import { validateReferralCode } from '../../actions/referral'
 
 const inputClass = 'w-full min-h-[44px] px-4 py-2 border border-blush rounded-lg font-body text-sm bg-white text-chocolat placeholder:text-chocolat/30 focus:outline-none focus:ring-2 focus:ring-rose focus:border-rose transition-colors'
 
@@ -12,6 +13,9 @@ export function PaiementClient({ userId }: { userId?: string | null }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [newsletter, setNewsletter] = useState(false)
+  const [referralCode, setReferralCode] = useState('')
+  const [referralValid, setReferralValid] = useState<boolean | null>(null)
+  const [referralChecking, setReferralChecking] = useState(false)
 
   const [form, setForm] = useState({
     prenom: '',
@@ -33,7 +37,8 @@ export function PaiementClient({ userId }: { userId?: string | null }) {
     setError('')
     const adresse = `${form.prenom} ${form.nom} — ${form.adresse}, ${form.codePostal} ${form.ville} — ${form.telephone}`
     try {
-      await createCheckoutSession(items, adresse, userId ?? undefined, newsletter)
+      const validCode = referralValid && referralCode.trim() ? referralCode.toUpperCase().trim() : undefined
+      await createCheckoutSession(items, adresse, userId ?? undefined, newsletter, validCode)
     } catch (err: unknown) {
       setLoading(false)
       setError(err instanceof Error ? err.message : 'Une erreur est survenue.')
@@ -130,6 +135,42 @@ export function PaiementClient({ userId }: { userId?: string | null }) {
           <div className="flex justify-between items-baseline">
             <span className="font-display text-lg text-chocolat">Total</span>
             <span className="font-display text-2xl text-chocolat">{total.toFixed(2)} €</span>
+          </div>
+
+          {/* Code de parrainage */}
+          <div className="space-y-2">
+            <p className="font-body text-xs text-chocolat/50 uppercase tracking-wide">Code ami (optionnel)</p>
+            <div className="flex gap-2">
+              <input
+                type="text"
+                value={referralCode}
+                onChange={e => { setReferralCode(e.target.value.toUpperCase()); setReferralValid(null) }}
+                placeholder="IDXXXXXX"
+                maxLength={8}
+                className="flex-1 min-h-[44px] px-4 font-body text-sm bg-white border border-blush rounded-lg text-chocolat placeholder-chocolat/30 focus:outline-none focus:ring-2 focus:ring-rose focus:border-rose transition-colors uppercase tracking-widest"
+              />
+              <button
+                type="button"
+                disabled={!referralCode.trim() || referralChecking}
+                onClick={async () => {
+                  setReferralChecking(true)
+                  const valid = await validateReferralCode(referralCode)
+                  setReferralValid(valid)
+                  setReferralChecking(false)
+                }}
+                className="min-h-[44px] px-4 font-body text-sm bg-blush text-chocolat rounded-lg hover:bg-blush/80 transition-colors disabled:opacity-40 shrink-0"
+              >
+                {referralChecking ? '...' : 'Valider'}
+              </button>
+            </div>
+            {referralValid === true && (
+              <p className="font-body text-xs text-green-600 flex items-center gap-1">
+                <span>✓</span> Code valide — réduction appliquée au paiement
+              </p>
+            )}
+            {referralValid === false && (
+              <p className="font-body text-xs text-rose">Code introuvable.</p>
+            )}
           </div>
 
           {/* Opt-in newsletter RGPD */}
