@@ -11,6 +11,7 @@ export function PaiementClient({ userId }: { userId?: string | null }) {
   const { items, total, clear } = useCart()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [newsletter, setNewsletter] = useState(false)
 
   const [form, setForm] = useState({
     prenom: '',
@@ -32,7 +33,7 @@ export function PaiementClient({ userId }: { userId?: string | null }) {
     setError('')
     const adresse = `${form.prenom} ${form.nom} — ${form.adresse}, ${form.codePostal} ${form.ville} — ${form.telephone}`
     try {
-      await createCheckoutSession(items, adresse, userId ?? undefined)
+      await createCheckoutSession(items, adresse, userId ?? undefined, newsletter)
     } catch (err: unknown) {
       setLoading(false)
       setError(err instanceof Error ? err.message : 'Une erreur est survenue.')
@@ -130,6 +131,28 @@ export function PaiementClient({ userId }: { userId?: string | null }) {
             <span className="font-display text-lg text-chocolat">Total</span>
             <span className="font-display text-2xl text-chocolat">{total.toFixed(2)} €</span>
           </div>
+
+          {/* Opt-in newsletter RGPD */}
+          <label className="flex items-start gap-3 cursor-pointer group">
+            <div className="relative mt-0.5 shrink-0">
+              <input
+                type="checkbox"
+                checked={newsletter}
+                onChange={e => setNewsletter(e.target.checked)}
+                className="sr-only peer"
+              />
+              <div className="w-4 h-4 border-2 border-blush rounded peer-checked:bg-rose peer-checked:border-rose transition-colors" />
+              {newsletter && (
+                <svg className="absolute inset-0 w-4 h-4 text-white pointer-events-none" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8l3.5 3.5L13 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              )}
+            </div>
+            <span className="font-body text-xs text-chocolat/60 leading-relaxed">
+              Je souhaite recevoir les offres exclusives et actualités d&apos;Instant Dessert par email.
+              Désabonnement possible à tout moment.
+            </span>
+          </label>
 
           {error && (
             <div className="bg-red-50 border border-red-200 rounded-lg px-4 py-3 font-body text-sm text-red-700">

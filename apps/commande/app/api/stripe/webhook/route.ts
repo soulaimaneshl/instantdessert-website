@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getStripe } from '@instantdessert/stripe'
+import { subscribeToNewsletter } from '@instantdessert/email'
 import type Stripe from 'stripe'
 
 // Désactive le body parsing automatique de Next.js (Stripe a besoin du raw body)
@@ -109,5 +110,11 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       { user_id: userId, order_id: order.id, points },
       { onConflict: 'order_id', ignoreDuplicates: true },
     )
+  }
+
+  // Abonnement newsletter si opt-in RGPD
+  if (session.metadata?.newsletter === '1') {
+    const email = session.customer_details?.email ?? ''
+    if (email) await subscribeToNewsletter(email, prenom || undefined)
   }
 }
