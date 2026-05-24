@@ -8,8 +8,8 @@
 | Epic 2 | Site Pro B2B | M1 | ✅ Done | 2.1→2.5 ✅ |
 | Epic 3 | Dark Kitchen M1 | M1 | ✅ Done | 3.1→3.7 ✅ |
 | Epic 4 | Dark Kitchen M2 — Fidélisation | M2 | ✅ Done | 4.1 ✅ · 4.2 ✅ · 4.3 ✅ |
-| Epic 5 | Dark Kitchen M3 — Croissance | M3 | ⬜ À faire | 5.1 ❌ · 5.2 ❌ · 5.3 ❌ |
-| Epic 6 | Site Brunch M6 | M6 | ⬜ À faire | 6.1 ❌ · 6.2 ❌ |
+| Epic 5 | Dark Kitchen M3 — Croissance | M3 | ✅ Done | 5.1 ✅ · 5.2 ✅ · 5.3 ✅ |
+| Epic 6 | Site Brunch M6 | M6 | ✅ Done | 6.1 ✅ · 6.2 ✅ |
 
 ---
 
@@ -33,12 +33,12 @@
 | 2.2 | Demande d'accès Espace Pro 3 étapes | ✅ |
 | 2.3 | Authentification Partenaire | ✅ |
 | 2.4 | Composition et validation commande B2B | ✅ |
-| 2.5 | Dashboard Partenaire (historique + rejouer commande) | ✅ (apps/pro/app/commandes/page.tsx) |
+| 2.5 | Dashboard Partenaire (historique + rejouer commande) | ✅ |
 
-### Epic 3 ⚠️ — Dark Kitchen M1 (6/7)
+### Epic 3 ✅ — Dark Kitchen M1 (7/7)
 | Story | Titre | Statut |
 |---|---|---|
-| 3.1 | Accueil DK : hero de marque + preuve sociale | ✅ (preuve sociale statique) |
+| 3.1 | Accueil DK : hero de marque + preuve sociale | ✅ |
 | 3.2 | Catalogue produits avec fiches sensorielles | ✅ |
 | 3.3 | Panier persistant + CartBar | ✅ |
 | 3.4 | Checkout : livraison + paiement Stripe | ✅ |
@@ -53,22 +53,22 @@
 | 4.2 | "Souvent commandé avec..." suggestions croisées | ✅ (statique pairings) |
 | 4.3 | Preuve sociale compteur commandes dynamique | ✅ |
 
-### Epic 5 ⬜ — Dark Kitchen M3 Croissance (0/3)
+### Epic 5 ✅ — Dark Kitchen M3 Croissance (3/3)
 | Story | Titre | Statut |
 |---|---|---|
-| 5.1 | Programme de fidélité par points | ❌ À faire |
-| 5.2 | Newsletter mensuelle Brevo + RGPD | ❌ À faire |
-| 5.3 | Parrainage ami avec code de réduction | ❌ À faire |
+| 5.1 | Programme de fidélité par points (1€=1pt) | ✅ |
+| 5.2 | Newsletter Brevo + case opt-in RGPD | ✅ |
+| 5.3 | Parrainage code unique + réduction Stripe | ✅ |
 
-### Epic 6 ⬜ — Site Brunch M6 (0/2)
+### Epic 6 ✅ — Site Brunch M6 (2/2)
 | Story | Titre | Statut |
 |---|---|---|
-| 6.1 | Catalogue formules brunch (ptitdej) | ❌ À faire |
-| 6.2 | Réservation brunch avec paiement Stripe | ❌ À faire |
+| 6.1 | Catalogue formules brunch (ptitdej) | ✅ |
+| 6.2 | Réservation brunch avec paiement Stripe | ✅ |
 
 ---
 
-## Bonus — Fait en plus (hors plan BMAD, mais utile en prod)
+## Bonus — Fait en plus (hors plan BMAD)
 | Réalisé | Description |
 |---|---|
 | Admin back-office | Dashboard, gestion catalogue, gestion commandes (portail/admin) |
@@ -76,12 +76,9 @@
 | SEO & Open Graph | Title templates, OG tags, generateMetadata dynamique fiches produit |
 | Performance & sécurité | Security headers, poweredByHeader false, viewport themeColor |
 | Config Vercel | `vercel.json` par app pour monorepo |
-| Migrations Supabase | 5 migrations SQL (produits, restaurants, orders B2B, orders B2C, admin RLS) |
+| Migrations Supabase | 9 migrations SQL complètes |
+| Webhook Stripe | Route `/api/stripe/webhook` : orders B2C + points fidélité + newsletter + parrainage |
 
 ---
 
-## Prochaines priorités recommandées
-1. **Story 5.1** — Programme fidélité par points
-2. **Story 5.2** — Newsletter Brevo + RGPD
-3. **Story 5.3** — Parrainage avec code de réduction
-4. **Epic 6** — Site brunch ptitdej (Milestone M6)
+## 🎉 Plan BMAD 100% complet — 27/27 stories
