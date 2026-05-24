@@ -6,23 +6,7 @@ import { CompteClient } from './CompteClient'
 export const metadata = { title: 'Mon compte — Instant Dessert' }
 
 export default async function ComptePage() {
-  // Mode preview sans Supabase
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
-    return (
-      <>
-        <Header />
-        <main className="max-w-5xl mx-auto px-6 py-10">
-          <h1 className="font-display text-3xl text-chocolat mb-8">Mon compte</h1>
-          <CompteClient
-            email="marie@example.com"
-            prenom="Marie"
-            createdAt="2026-01-15T10:00:00Z"
-            points={47}
-          />
-        </main>
-      </>
-    )
-  }
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) redirect('/connexion')
 
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
