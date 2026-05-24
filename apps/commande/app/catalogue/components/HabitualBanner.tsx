@@ -8,8 +8,15 @@ interface OrderItem {
   quantite: number
 }
 
+const MOCK_ITEMS = [
+  { productId: '2', nom: 'Paris-Brest praliné', prix: 7.50, quantite: 1 },
+  { productId: '3', nom: 'Fondant chocolat noir 70%', prix: 5.90, quantite: 2 },
+]
+
 async function HabitualBannerInner() {
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) return null
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    return <HabitualBannerClient items={MOCK_ITEMS} prenom="Marie" />
+  }
 
   const { createClient } = await import('@instantdessert/supabase/server')
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
