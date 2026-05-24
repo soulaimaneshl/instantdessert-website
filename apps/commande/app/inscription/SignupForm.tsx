@@ -25,6 +25,13 @@ export function SignupForm({ next }: { next?: string }) {
     setLoading(true)
     setError('')
 
+    // Mode preview sans Supabase
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+      setLoading(false)
+      setDone(true)
+      return
+    }
+
     const supabase = createClient()
     const { error: authError } = await supabase.auth.signUp({
       email,
