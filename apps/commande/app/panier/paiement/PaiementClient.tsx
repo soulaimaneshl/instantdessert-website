@@ -7,7 +7,7 @@ import { createCheckoutSession } from './actions'
 
 const inputClass = 'w-full min-h-[44px] px-4 py-2 border border-blush rounded-lg font-body text-sm bg-white text-chocolat placeholder:text-chocolat/30 focus:outline-none focus:ring-2 focus:ring-rose focus:border-rose transition-colors'
 
-export function PaiementClient() {
+export function PaiementClient({ userId }: { userId?: string | null }) {
   const { items, total, clear } = useCart()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -32,7 +32,7 @@ export function PaiementClient() {
     setError('')
     const adresse = `${form.prenom} ${form.nom} — ${form.adresse}, ${form.codePostal} ${form.ville} — ${form.telephone}`
     try {
-      await createCheckoutSession(items, adresse)
+      await createCheckoutSession(items, adresse, userId ?? undefined)
     } catch (err: unknown) {
       setLoading(false)
       setError(err instanceof Error ? err.message : 'Une erreur est survenue.')

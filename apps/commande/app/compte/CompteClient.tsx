@@ -10,6 +10,7 @@ interface Props {
   email: string
   prenom: string
   createdAt: string
+  points?: number
 }
 
 // Commandes fictives pour la preview — remplacées par Supabase une fois configuré
@@ -37,7 +38,7 @@ const MOCK_COMMANDES = [
   },
 ]
 
-export function CompteClient({ email, prenom, createdAt }: Props) {
+export function CompteClient({ email, prenom, createdAt, points = 0 }: Props) {
   const router = useRouter()
   const { addItem } = useCart()
 
@@ -96,6 +97,28 @@ export function CompteClient({ email, prenom, createdAt }: Props) {
             className="w-full min-h-[40px] px-4 inline-flex items-center justify-center font-body text-sm border border-chocolat/20 text-chocolat/60 rounded-full hover:border-chocolat hover:text-chocolat transition-colors">
             Se déconnecter
           </button>
+        </div>
+
+        {/* Carte fidélité */}
+        <div className="bg-white border border-blush rounded-2xl p-5 space-y-3">
+          <div className="flex items-center justify-between">
+            <p className="font-display text-base text-chocolat">Mes points</p>
+            <span className="font-body text-xs text-rose uppercase tracking-widest">Fidélité</span>
+          </div>
+          <div className="flex items-end gap-1">
+            <span className="font-display text-4xl text-caramel">{points}</span>
+            <span className="font-body text-sm text-chocolat/40 mb-1">pts</span>
+          </div>
+          <p className="font-body text-xs text-chocolat/40 leading-snug">
+            1€ dépensé = 1 point. Cumulez des points à chaque commande pour débloquer des avantages exclusifs.
+          </p>
+          <div className="w-full bg-blush rounded-full h-1.5">
+            <div
+              className="bg-caramel h-1.5 rounded-full transition-all"
+              style={{ width: `${Math.min(100, (points / 100) * 100)}%` }}
+            />
+          </div>
+          <p className="font-body text-xs text-chocolat/30 text-right">{points}/100 pts pour le prochain palier</p>
         </div>
 
         <Link href="/catalogue"

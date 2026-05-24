@@ -10,7 +10,7 @@ interface CartItem {
   quantite: number
 }
 
-export async function createCheckoutSession(items: CartItem[], adresse: string) {
+export async function createCheckoutSession(items: CartItem[], adresse: string, userId?: string) {
   if (!process.env.STRIPE_SECRET_KEY) {
     redirect('/confirmation?session_id=test_preview')
   }
@@ -34,7 +34,7 @@ export async function createCheckoutSession(items: CartItem[], adresse: string) 
       quantity: item.quantite,
     })),
     shipping_address_collection: { allowed_countries: ['FR'] },
-    metadata: { adresse },
+    metadata: { adresse, user_id: userId ?? '' },
     success_url: `${appUrl}/confirmation?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${appUrl}/panier/paiement`,
   })
