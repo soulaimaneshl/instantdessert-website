@@ -6,7 +6,7 @@
 |---|---|---|---|---|
 | Epic 1 | Fondations & Portail | Pré-M1 | ✅ Done | 1.1 → 1.7 |
 | Epic 2 | Site Pro B2B | M1 | ✅ Done | 2.1→2.5 ✅ |
-| Epic 3 | Dark Kitchen M1 | M1 | ⚠️ Partiel | 3.1→3.6 ✅ · 3.7 ❌ |
+| Epic 3 | Dark Kitchen M1 | M1 | ✅ Done | 3.1→3.7 ✅ |
 | Epic 4 | Dark Kitchen M2 — Fidélisation | M2 | 🔄 À faire | 4.1 ❌ · 4.2 ⚠️ · 4.3 ❌ |
 | Epic 5 | Dark Kitchen M3 — Croissance | M3 | ⬜ À faire | 5.1 ❌ · 5.2 ❌ · 5.3 ❌ |
 | Epic 6 | Site Brunch M6 | M6 | ⬜ À faire | 6.1 ❌ · 6.2 ❌ |
@@ -44,7 +44,7 @@
 | 3.4 | Checkout : livraison + paiement Stripe | ✅ |
 | 3.5 | Page de confirmation de commande | ✅ |
 | 3.6 | Compte client DK (inscription + historique) | ✅ |
-| 3.7 | Teaser brunch + collecte liste d'attente | ❌ À faire |
+| 3.7 | Teaser brunch + collecte liste d'attente | ✅ |
 
 ### Epic 4 🔄 — Dark Kitchen M2 Fidélisation (0/3)
 | Story | Titre | Statut |
@@ -81,7 +81,6 @@
 ---
 
 ## Prochaines priorités recommandées
-1. **Story 3.7** — Teaser brunch + waitlist (une section sur la home DK)
-2. **Story 4.1** — HabitualBanner "Votre habituel ?" (nécessite Supabase connecté)
+1. **Story 4.1** — HabitualBanner "Votre habituel ?" (nécessite Supabase connecté)
 3. **Story 4.3** — Compteur dynamique (nécessite Supabase connecté)
 4. **Epics 5 & 6** — Fidélité, newsletter, parrainage, brunch (Milestone M3/M6)
