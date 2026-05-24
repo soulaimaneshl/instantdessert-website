@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { cormorantGaramond, montserrat } from '@instantdessert/ui/fonts'
 import { CartProvider } from '../lib/cart'
 import { Analytics } from '@instantdessert/ui'
@@ -19,6 +19,12 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary_large_image' },
   robots: { index: true, follow: true },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#FFF7EE',
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
